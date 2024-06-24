@@ -1,7 +1,7 @@
 EDeepDTI：A scalable and robust ensemble deep learning method for predicting drug-target interactions
 ====
 ![image](model.jpg)
-1 The environment of EDeepDTI
+1. The environment of EDeepDTI
 ===
  python = 3.8.19<br>
  cudatoolkit = 11.8.0<br>
