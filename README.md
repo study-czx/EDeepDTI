@@ -22,8 +22,14 @@ Usage
 
 Code and data
 ===
-Raw data
+Raw data (datasets_DTI/origin_data)
 ------
+（1）BingdingDB: `BdingdingDB_ALl_202401.tsv` (compound-protein binding affinity) were downloaded from the BingdingDB database (https://www.bindingdb.org/rwd/bind/chemsearch/marvin/Download.jsp).<br>
+（2）ChEMBL: `ChEMBL_activity/1.csv, 2.csv, ..., 14.csv` (compound-protein binding affinity) were downloaded from the ChEMBL database activities (https://www.ebi.ac.uk/chembl/web_components/explore/activities/); <br>
+`Drug Mechanisms.tsv` (drug-target interactions for case study) were downloaded from the ChEMBL database drug_mechanisms (https://www.ebi.ac.uk/chembl/web_components/explore/drug_mechanisms/); <br>
+`ChEMBL_target.csv` (ChEMBL-UniProt target id map and target infomation) were downloaded from the ChEMBL database target (https://www.ebi.ac.uk/chembl/web_components/explore/targets/). <br>
+（3）DrugBank:
+full database.xml (drug-target interactions and drug-drug interactions) 
 （1）Drug-Target Interactions（DrugBank dataset/DTI_8207.csv）: the drug-target interactions were downloaded from the DrugBank database (https://go.drugbank.com/releases/latest).<br>
 （2）Drug-Drug Interactions（network/Drugbank_DDI_574616）: the drug-drug interactions were downloaded from the DrugBank database (https://go.drugbank.com/releases/latest).<br>
 （3）Protein-Protein Interactions（network/Uniprot_PPI_164797）: the protein-protein interactions were downloaded from the STRING database (https://cn.string-db.org/cgi/download?sessionId=bq0JfjmKDFZ5).<br>
