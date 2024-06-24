@@ -1,7 +1,7 @@
 EDeepDTI：A scalable and robust ensemble deep learning method for predicting drug-target interactions
 ====
 ![image](model.jpg)
-The environment of HNetGO-DTI
+The environment of EDeepDTI
 ===
  python 3.8.19<br>
  cudatoolkit 11.8.0 - cudnn 8.9.2.26<br>
@@ -13,15 +13,10 @@ The environment of HNetGO-DTI
 
 Usage
 ===
- All data are csv files of binary relational data<br>
- Unzip the folders GO.rar<br>
- Run `HNetPa-DTI.py`<br>
- For neg3, neg5, neg7, neg9, neg3-bias, neg5-bias, neg7-bias and neg9-bias dataset, and two imbalanced datasets，run `HNetPa-DTI_Neg3579_and_neg3_5.py`.<br>
- Run `HNetPa-DTI_for_different_type_dataset.py` to perform HNetPa-DTI on different types of datasets（enzyme dataset, ion channel dataset, GPCR dataset, nuclear receptor dataset，and non-classified dataset）.<br>
- For different settings in the paper, run xxx.py file with a different name (`-Descriptor.py`，`-Hetro.py`，`-DDI&PPI.py`，`-Disease.py`，`-Pathway.py`，`-GO.py`，`-GOsim.py`).<br>
- For grid search for hyperparameters, run `GridSearchCV_for_standard_hyperparameters.py` to determine the values of four standard hyperparameters, run `GridSearchCV_for_GOsim_th.py`，`GridSearchCV_for_low-dimensional_dimensions`，and `GridSearchCV_for_n_hiddens_DNN.py` to determine extended hyperparameters.<br>
- Run `DNN.py` to perform DNN-o and DNN-d.<br>
- Run `HNetPa-DTI_10fold.py` to get the prediction scores of all drug-protein pairs.
+ Run `EDeepDTI.py` for DrugBank dataset, run `EDeepDTI_CPI.py` for CPI dataset, run `EDeepDTI_Davis_KIBA.py` for Davis and KIBA datasets <br>
+ For EDeepDTI, input_type = 'e'; for EDeepDTI-d, input_type = 'd'; for EDeepDTI-s, input_type = 's'.<br>
+ For grid search for hyperparameters, run `EDeepDTI_GridSearchCV.py` to determine the values of hyperparameters, run `EDeepDTI_GridSearchCV_epoch.py` to determine the number of epochs.<br>
+ Run `EDeepDTI_10fold.py` to get the prediction scores of all drug-protein pairs on the DrugBank dataset.
 
 Code and data
 ===
