@@ -24,8 +24,13 @@ Code and data
 ===
 Raw data (datasets_DTI/origin_data)
 ------
-（1）BingdingDB: `BdingdingDB_ALl_202401.tsv` (compound-protein binding affinity) were downloaded from the BingdingDB database (https://www.bindingdb.org/rwd/bind/chemsearch/marvin/Download.jsp).<br>
-（2）ChEMBL: `ChEMBL_activity/1.csv, 2.csv, ..., 14.csv` (compound-protein binding affinity) were downloaded from the ChEMBL database activities (https://www.ebi.ac.uk/chembl/web_components/explore/activities/); <br>
+（1）BingdingDB: 
+-
+`BdingdingDB_ALl_202401.tsv` (compound-protein binding affinity) were downloaded from the BingdingDB database (https://www.bindingdb.org/rwd/bind/chemsearch/marvin/Download.jsp).<br>
+
+（2）ChEMBL: 
+-
+`ChEMBL_activity/1.csv, 2.csv, ..., 14.csv` (compound-protein binding affinity) were downloaded from the ChEMBL database activities (https://www.ebi.ac.uk/chembl/web_components/explore/activities/) and named 1,2,...,14.csv; <br>
 `Drug Mechanisms.tsv` (drug-target interactions for case study) were downloaded from the ChEMBL database drug_mechanisms (https://www.ebi.ac.uk/chembl/web_components/explore/drug_mechanisms/); <br>
 `ChEMBL_target.csv` (ChEMBL-UniProt target id map and target infomation) were downloaded from the ChEMBL database target (https://www.ebi.ac.uk/chembl/web_components/explore/targets/). <br>
 （3）DrugBank:
