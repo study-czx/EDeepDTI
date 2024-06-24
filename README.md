@@ -1,7 +1,7 @@
 EDeepDTI：A scalable and robust ensemble deep learning method for predicting drug-target interactions
 ====
 ![image](model.jpg)
-The environment of EDeepDTI
+1 The environment of EDeepDTI
 ===
  python = 3.8.19<br>
  cudatoolkit = 11.8.0<br>
@@ -12,7 +12,7 @@ The environment of EDeepDTI
  numpy = 1.24.3<br>
  sqlalchemy = 2.0.30<br>
 
-Usage
+2 Usage
 ===
 （1）Run `EDeepDTI.py` for DrugBank dataset, run `EDeepDTI_CPI.py` for CPI dataset, run `EDeepDTI_Davis_KIBA.py` for Davis and KIBA datasets <br>
 （2） For EDeepDTI, input_type = 'e'; for EDeepDTI-d, input_type = 'd'; for EDeepDTI-s, input_type = 's'.<br>
@@ -20,29 +20,29 @@ Usage
 （4） For grid search for hyperparameters, run `EDeepDTI_GridSearchCV.py` to determine the values of hyperparameters, run `EDeepDTI_GridSearchCV_epoch.py` to determine the number of epochs.<br>
 （5） Run `EDeepDTI_10fold.py` to get the prediction scores of all drug-protein pairs on the DrugBank dataset.
 
-Code and data
+3 Code and data
 ===
-Raw data (datasets_DTI/origin_data)
+3.1 Raw data (datasets_DTI/origin_data)
 ------
-#### BingdingDB
+##### BingdingDB
 `BdingdingDB_ALl_202401.tsv` (compound-protein binding affinity) were downloaded from 'https://www.bindingdb.org/rwd/bind/chemsearch/marvin/Download.jsp'.<br>
-#### ChEMBL
+##### ChEMBL
 （1）`ChEMBL_activity/1.csv, 2.csv, ..., 14.csv` (compound-protein binding affinity) were downloaded from 'https://www.ebi.ac.uk/chembl/web_components/explore/activities/' and named 1,2,...,14.csv; <br>
 （2）`Drug Mechanisms.tsv` (drug-target interactions for case study) were downloaded from 'https://www.ebi.ac.uk/chembl/web_components/explore/drug_mechanisms/'; <br>
 （3）`ChEMBL_target.csv` (ChEMBL-UniProt id map and target infomation) were downloaded from 'https://www.ebi.ac.uk/chembl/web_components/explore/targets/'; <br>
 （4）`src1src2.txt` (ChEMBL-DrugBank id map), `src1src22.txt` (ChEMBL-PubChem Compounds id map), `src2src22.txt` (DrugBank-PubChem Compounds) were downloaded from UniChem 2.0 'https://ftp.ebi.ac.uk/pub/databases/chembl/UniChem/data/wholeSourceMapping/'.<br>
-#### DrugBank
+##### DrugBank
 （1）`DrugBank_DTI.csv` (drug-target interactions for DrugBank dataset) were downloaded from 'https://go.drugbank.com/releases/latest#protein-identifiers'; <br>
 （2）`full database.xml` (drug-drug interactions) were downloaded from 'https://go.drugbank.com/releases/latest#full'; <br>
 （3）`structure links.csv` (Drug SMILES, DrugBank id map with other databases) were downloaded from 'https://go.drugbank.com/releases/latest#structures'.<br>
-#### QuickGO
+##### QuickGO
 `MF.tsv`,`BP.tsv`, and `CC.tsv` (protein-GO term associations) were downloaded from 'https://www.ebi.ac.uk/QuickGO/' (QuickGO browser).<br>
-#### STRING
+##### STRING
 `9606.protein.links.full.v12.0_STRING.txt` (human protein-protein interactions) were downloaded from 'https://cn.string-db.org/cgi/download?sessionId=bq0JfjmKDFZ5&species_text=Homo+sapiens'.<br>
-#### Uniprot
+##### Uniprot
 （1）`uniprotkb_reviewed_2024_02_22.tsv` (protein amino acid sequences) were downloaded from 'https://www.uniprot.org/uniprotkb?query=reviewed%3Atrue&facets=model_organism%3A9606%2Creviewed%3Atrue';<br>
 （2）`uniprot_string_map.tsv` (UniProt-STRING id map) were obtained from 'https://www.uniprot.org/id-mapping'.<br>
-#### KEGG (case study/)
+##### KEGG (case study/)
 `KEGG_DTI.txt` (drug-target interactions for case study) were downloaded from 'https://www.genome.jp/brite/br08906'.<br>
 
 Construction of datasets
