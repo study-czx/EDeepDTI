@@ -2,14 +2,16 @@ import numpy as np
 import random
 import torch
 from torch.utils import data
-import dgl
+from pathlib import Path
+import os
+import sklearn.metrics as skm
+import pandas as pd
 
 def setup_seed(seed):
     torch.manual_seed(seed)
     torch.cuda.manual_seed_all(seed)
     np.random.seed(seed)
     random.seed(seed)
-    dgl.random.seed(seed)
 
 def id_map(my_id):
     id_map = {"interger_id": "origin_id"}
@@ -144,3 +146,40 @@ def Get_weight_sim_graph(sim, num_node):
     weight = torch.tensor(sim_value)
     Graph = dgl.graph((src, dst), num_nodes=num_node)
     return Graph, weight
+
+def Make_path(data_path):
+    data_path = Path(data_path)
+    if not data_path.exists():
+        os.makedirs(data_path)
+
+def get_metric(all_labels, all_output_scores):
+    test_scores_label = computer_label(all_output_scores, 0.5)
+    test_acc = skm.accuracy_score(all_labels, test_scores_label)
+    test_auc = skm.roc_auc_score(all_labels, all_output_scores)
+    test_aupr = skm.average_precision_score(all_labels, all_output_scores)
+    test_mcc = skm.matthews_corrcoef(all_labels, test_scores_label)
+    test_F1 = skm.f1_score(all_labels, test_scores_label)
+    test_recall = skm.recall_score(all_labels, test_scores_label)
+    test_precision = skm.precision_score(all_labels, test_scores_label)
+
+    print(test_acc, test_auc, test_aupr, test_mcc, test_F1)
+    this_test_result = [format(test_acc, '.4f'), format(test_auc, '.4f'), format(test_aupr, '.4f'),
+                 format(test_mcc, '.4f'), format(test_F1, '.4f'), format(test_recall, '.4f'),
+                 format(test_precision, '.4f')]
+    return this_test_result
+
+def show_metric(output_score, result_path, input_type):
+    print(output_score)
+    mean_acc, mean_auc, mean_aupr, mean_mcc, mean_f1, mean_recall, mean_precision = np.nanmean(
+        output_score[0]), np.nanmean(output_score[1]), np.nanmean(output_score[2]), np.nanmean(
+        output_score[3]), np.nanmean(output_score[4]), np.nanmean(output_score[5]), np.nanmean(
+        output_score[6])
+    std_acc, std_auc, std_aupr, std_mcc, std_f1, std_recall, std_precision = np.nanstd(
+        output_score[0]), np.nanstd(
+        output_score[1]), np.nanstd(output_score[2]), np.nanstd(output_score[3]), np.nanstd(
+        output_score[4]), np.nanstd(output_score[5]), np.nanstd(output_score[6])
+    print(mean_acc, mean_auc, mean_aupr, mean_mcc, mean_f1, mean_recall, mean_precision)
+    print(std_acc, std_auc, std_aupr, std_mcc, std_f1, std_recall, std_precision)
+    pd_output = pd.DataFrame(output_score)
+    pd_output.to_csv(result_path + '_score_'+input_type+'.csv', index=False)
+    return mean_acc, mean_auc, mean_aupr, mean_mcc, mean_f1, mean_recall, mean_precision
