@@ -1,7 +1,7 @@
 EDeepDTI：A scalable and robust ensemble deep learning method for predicting drug-target interactions
 ====
 ![image](model.jpg)
-1. The environment of EDeepDTI
+1' The environment of EDeepDTI
 ===
  python = 3.8.19<br>
  cudatoolkit = 11.8.0<br>
@@ -12,7 +12,7 @@ EDeepDTI：A scalable and robust ensemble deep learning method for predicting dr
  numpy = 1.24.3<br>
  sqlalchemy = 2.0.30<br>
 
-2 Usage
+2' Usage
 ===
 （1）Run `EDeepDTI.py` for DrugBank dataset, run `EDeepDTI_CPI.py` for CPI dataset, run `EDeepDTI_Davis_KIBA.py` for Davis and KIBA datasets <br>
 （2） For EDeepDTI, input_type = 'e'; for EDeepDTI-d, input_type = 'd'; for EDeepDTI-s, input_type = 's'.<br>
@@ -20,9 +20,9 @@ EDeepDTI：A scalable and robust ensemble deep learning method for predicting dr
 （4） For grid search for hyperparameters, run `EDeepDTI_GridSearchCV.py` to determine the values of hyperparameters, run `EDeepDTI_GridSearchCV_epoch.py` to determine the number of epochs.<br>
 （5） Run `EDeepDTI_10fold.py` to get the prediction scores of all drug-protein pairs on the DrugBank dataset.
 
-3 Code and data
+3' Code and data
 ===
-3.1 Raw data (datasets_DTI/origin_data)
+3.1  Raw data (datasets_DTI/origin_data)
 ------
 ##### BingdingDB
 `BdingdingDB_ALl_202401.tsv` (compound-protein binding affinity) were downloaded from 'https://www.bindingdb.org/rwd/bind/chemsearch/marvin/Download.jsp'.<br>
@@ -45,7 +45,7 @@ EDeepDTI：A scalable and robust ensemble deep learning method for predicting dr
 ##### KEGG (case study/)
 `KEGG_DTI.txt` (drug-target interactions for case study) were downloaded from 'https://www.genome.jp/brite/br08906'.<br>
 
-Construction of datasets
+3.2  Process of datasets
 ------
  First, the DrugBank dataset folder contains the files DTI_8207.csv, Drug_1520.csv, Protein_1771.csv.
  
