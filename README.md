@@ -3,14 +3,14 @@ EDeepDTI：A scalable and robust ensemble deep learning method for predicting dr
 ![image](model.jpg)
 The environment of EDeepDTI
 ===
- python 3.8.19<br>
- cudatoolkit 11.8.0<br>
- cudnn 8.9.2.26<br>
- pytorch 2.2.2<br>
- scikit-learn 1.3.0<br>
- pandas 2.0.3<br>
- numpy 1.24.3<br>
- sqlalchemy 2.0.30
+ python = 3.8.19<br>
+ cudatoolkit = 11.8.0<br>
+ cudnn = 8.9.2.26<br>
+ pytorch = 2.2.2<br>
+ scikit-learn = 1.3.0<br>
+ pandas = 2.0.3<br>
+ numpy = 1.24.3<br>
+ sqlalchemy = 2.0.30<br>
 
 Usage
 ===
