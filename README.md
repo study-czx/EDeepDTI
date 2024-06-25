@@ -49,7 +49,7 @@ EDeepDTI：A scalable and robust ensemble deep learning method for predicting dr
 ------
  We placed the useful data obtained from the raw data in the 'datasets_DTI/processed_data' folder and the final generated dataset and its features in the 'datasets_DTI/datasets' folder.
 
-##### The detailed steps to obtain positive samples of the DrugBank dataset and positive and negative samples of the CPI dataset are as follows:
+#### The detailed steps to obtain positive samples of the DrugBank dataset and positive and negative samples of the CPI dataset are as follows:
 In `main_data.py`.<br>
 （1）Run 'get_drugbank_dti()' to get known DTIs from the DrugBank dataset; run 'filter_drugbank_dti()' to filter the DrugBank dataset with the required drugs and proteins.<br>
 （2）Run 'get_cpi()' to get all CPI activity data from the ChEMBL and BindingDB databases; run 'get_P_N()' to get positive and negative samples of the CPI dataset according to the threshold.<br>
@@ -57,7 +57,7 @@ In `main_data.py`.<br>
 （4）Run 'filter_cpi()' to filter the CPI dataset with the required drugs and proteins.<br>
 （5）Run 'filter_cpi_with_bi_compound_protein()' to filter the CPI dataset by ensuring that each compound and protein is present in both positive and negative samples, and get the CPI-extra set for the SD, SP, and SDP tasks.<br>
 
-##### The detailed steps to generate training, validation, and test sets for the DrugBank and CPI datasets are as follows:
+#### The detailed steps to generate training, validation, and test sets for the DrugBank and CPI datasets are as follows:
 （1）In `DTI_datasets_splict.py`, run 'get_DTI_P_N()' to select negative samples for DrugBank dataset, run 'splict_train_valid_test_DTI(type)' to get the training, validation, and testing sets for the SR, SD, SP, and SDP tasks on the DrugBank dataset.<br>
 （2）In `CPI_datasets_splict.py`, run 'splict_train_valid_test_CPI(type)' to get the training, validation, and testing sets for the SR, SD, SP, and SDP tasks on the CPI dataset.<br>
 
