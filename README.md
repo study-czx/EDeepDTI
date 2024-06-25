@@ -47,7 +47,8 @@ EDeepDTI：A scalable and robust ensemble deep learning method for predicting dr
 
 3.2  Process of datasets (datasets_DTI/)
 ------
- We placed the useful data obtained from the raw data in the 'datasets_DTI/processed_data' folder and the final generated dataset and its features in the 'datasets_DTI/datasets' folder.
+ We placed the useful data obtained from the raw data in the 'datasets_DTI/processed_data' folder and the final generated dataset and its features in the 'datasets_DTI/datasets' folder.<br>
+ （1）Run `Get_DDI.R` to get drug-drug interactions from `full database.xml`.
 
 #### The detailed steps to obtain positive samples of the DrugBank dataset and positive and negative samples of the CPI dataset are as follows:
 In `main_data.py`.<br>
@@ -57,18 +58,22 @@ In `main_data.py`.<br>
 （4）Run 'filter_cpi()' to filter the CPI dataset with the required drugs and proteins.<br>
 （5）Run 'filter_cpi_with_bi_compound_protein()' to filter the CPI dataset by ensuring that each compound and protein is present in both positive and negative samples, and get the CPI-extra set for the SD, SP, and SDP tasks.<br>
 
-#### The detailed steps to generate training, validation, and test sets for the DrugBank and CPI datasets are as follows:
+#### The detailed steps to generate training, validation, and testing sets for the DrugBank and CPI datasets are as follows:
 （1）In `DTI_datasets_splict.py`, run 'get_DTI_P_N()' to select negative samples for DrugBank dataset, run 'splict_train_valid_test_DTI(type)' to get the training, validation, and testing sets for the SR, SD, SP, and SDP tasks on the DrugBank dataset.<br>
 （2）In `CPI_datasets_splict.py`, run 'splict_train_valid_test_CPI(type)' to get the training, validation, and testing sets for the SR, SD, SP, and SDP tasks on the CPI dataset.<br>
 
 3.3 Calculation of feature
 ------
-### Calculation of GO term similarities
+#### EDeepDTI-d
+（1）Run `cal_drug_structure.py` to calculate the MACCS, RDKit, ECFP4, and FCFP4 fingerprints for DrugBank, CPI, Davis, and KIBA dataset.<br>
+（2）Run `cal_finger&get_fasta_need.R` to calculate the PubChem fingerprint for DrugBank, CPI, Davis, and KIBA dataset.<br>
+（3）Run `cal_finger&get_fasta_need.R` to get '.fasta' format data of proteins.<br>
+（4）Use the open-source platform 'iLearnPlus' to calculate the protein sequence descriptors: TPC, CKSAAP, KSCTriad, PAAC, and CTD (CTDC, CTDT, CTDD).<br>
+
+#### EDeepDTI-d
 Run `cal_GO_sim.R` to calculate GO similarity values. (GO/GO_sim/)
 
-### Calculation of molecular fingerprint and protein descriptor
-（1）Run `cal_fingerprint.R` to calculate the PubChem fingerprint.(feature/)<br>
-（2）Run `trans_to_fasta.R` to convert protein_seq_13816.csv to protein_13816.fasta, and then use the iLearnPlus to calculate the KSCTriad.(feature/)
+
 
 Case Study
 ------
