@@ -64,29 +64,21 @@ In `main_data.py`.<br>
 
 3.3 Calculation of feature
 ------
-#### EDeepDTI-d
+#### EDeepDTI-d (datasets_DTI/)
 （1）Run `cal_drug_structure.py` to calculate the MACCS, RDKit, ECFP4, and FCFP4 fingerprints for DrugBank, CPI, Davis, and KIBA dataset.<br>
 （2）Run `cal_finger&get_fasta_need.R` to calculate the PubChem fingerprint for DrugBank, CPI, Davis, and KIBA dataset.<br>
 （3）Run `cal_finger&get_fasta_need.R` to get '.fasta' format data of proteins.<br>
 （4）Use the open-source platform 'iLearnPlus' to calculate the protein sequence descriptors: TPC, CKSAAP, KSCTriad, PAAC, and CTD (CTDC, CTDT, CTDD).<br>
 
-#### EDeepDTI-d
-Run `cal_GO_sim.R` to calculate GO similarity values. (GO/GO_sim/)
+#### EDeepDTI-s (datasets_DTI/)
+（1）In `cal_feature_sim.py`, run 'cal_finger_sim(data_types)' to calculate Jaccard similarity measures of five molecular fingerprints for DrugBank, Davis, and KIBA datasets; run 'cal_DDI_sim()' to calculate Jaccard similarity measures of DDIs for DrugBank dataset; run 'cal_PPI_sim(data_types)' to calculate Jaccard similarity measures of PPIs, and the topological similarities of the human PPI network for DrugBank, CPI, Davis, and KIBA datasets.<br>
+（2）Run `cal_GO_seq_sim.R` to calculate protein sequence similarity and three types of GO semantic similarities for DrugBank, CPI, Davis, and KIBA datasets.<br>
 
-
-
-Case Study
+3.4 Case Study (case study/)
 ------
-Under the case studies folder<br>
-（1）Run `case studies.R` to view prediction scores of training sets and predict other scores, and get top 10 scores.（Predict_scores.csv, case studies/top10_socres）<br>
-（2）Run `analysis_scores.R` to view the prediction scores of the DTIs of the latest versions of the DrugBank, KEGG and ChEMBL databases.(2024.1.6)<br>
-（3）Run `analysis_top_candidate.R` to validate top 10 candidate DTIs across three databases.
-
-Model Interpretation
-------
-（1）Under the feature folder, run `cal_feature_sims.R` to calculate PubChem fingerprint similarities and KSCTriad similarities.（Pubchem_sim_1520.csv and KSCTriad_sim_1771.csv）<br>
-（2）Run `Get_network_similarity.py` to calculate the first-order neighbor Jaccard similarities in HNet-DrPD-P. （feature/Dr_D_P_one_order_similarities.csv）<br>
-（3）Run `analysis_model_interpretation.py` to calculate the similarities in 'J. Model Interpretation'.
+（1）Run `EDeepDTI_10fold.py.py` to get the scores for all drug-protein pairs in the DrugBank dataset.<br>
+（2）Run `Get_KEGG_ChEMBl_DTI.py` to get DTIs from ChEMBL and KEGG databases, and retain only the DTIs between drugs and proteins that exist in the DrugBank dataset.<br>
+（3）Run `analysis_scores_from_KEGG_ChEMBL.py` to obtain the distribution of prediction scores for all unknown drug-protein pairs and the distribution of prediction scores for DTIs from the KEGG and ChEMBL databases.
 
 For citation
 ------
