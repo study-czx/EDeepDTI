@@ -47,12 +47,20 @@ EDeepDTI：A scalable and robust ensemble deep learning method for predicting dr
 
 3.2  Process of datasets (datasets_DTI/)
 ------
- We placed the useful data obtained from the raw data in the 'processed_data' folder and the final generated dataset and its features in the 'datasets' folder.
- 
-### The detailed steps for the construction of the DTI-net dataset are as follows:
-Under the DrugBank dataset folder<br>
-（1）run `Get_max_subG.py` to divide the DTIs into two parts (DTI-benchmark and DTI-extra).<br>
-（2）run `Get_shortest_length.py` to get l_b of all drug-protein pairs (Dr_P_shortest_length.csv).<br>
+ We placed the useful data obtained from the raw data in the 'datasets_DTI/processed_data' folder and the final generated dataset and its features in the 'datasets_DTI/datasets' folder.
+
+##### The detailed steps to obtain positive samples from the DrugBank dataset and positive and negative samples from the CPI dataset are as follows:
+In `main_data.py`.<br>
+Run 'get_drugbank_dti()' to get known DTIs from the DrugBank dataset; run 'filter_drugbank_dti()' to filter the DrugBank dataset with the required drugs and proteins.<br>
+Run 'get_cpi()' to get all CPI activity data from the ChEMBL and BindingDB databases; run 'get_P_N()' to get positive and negative samples of the CPI dataset according to the threshold.<br>
+Run 'get_info()' to get PubChem compound info with unique Canonical SMILES (Molecular Weight < 1000) and UniProt protein info with unique sequences; run get_GO_PPI() to get human PPI data and protein-GO term data.<br>
+Run 'filter_cpi()' to filter the CPI dataset with the required drugs and proteins.<br>
+Run 'filter_cpi_with_bi_compound_protein()' to filter the CPI dataset by ensuring that each compound and protein is present in both positive and negative samples, and get the CPI-extra set for the SD, SP, and SDP tasks.<br>
+
+##### 获取DrugBank数据集负样本的细节步骤如下所示：
+
+
+`Get_shortest_length.py` to get l_b of all drug-protein pairs (Dr_P_shortest_length.csv).<br>
 （3）run `Get_N3_N5_N7_N9.R` to classify unlabeled drug-protein pairs into N3-N9 according to l_b (negative samples/DTI benchmark N3_5_7_9).<br>
 Under the HNGO-DTI folder<br>
 （4）Run `Get_l_h_heterogeneous.py` to get l_h of all drug-protein pairs in HNet-DrPD (Dr_D_P_shortest_length.csv).<br>
@@ -60,15 +68,15 @@ Under the DrugBank dataset folder<br>
 （5）run `Get_need_neg.R` to select candidate negative samples based on l_h>=3 (negative samples/my_need_neg3, my_need_neg5.csv and extra_neg3.csv).<br>
 （6）run `select_negative_by_network.R` to get neg_DTI-net_8020.csv and neg_DTI-net_187.csv.<br>
 
-### The detailed steps for the construction of the DTI-rand dataset are as follows:
+##### The detailed steps for the construction of the DTI-rand dataset are as follows:
  Under the DrugBank dataset folder，run `select_negative_randomly.R` to randomly select negative samples (neg_DTI-rand_8020.csv and neg_DTI-rand_187.csv).<br>
          
-### Divide the testing set according to different prediction tasks (SR, SD, SP, and SDP)：
+##### Divide the testing set according to different prediction tasks (SR, SD, SP, and SDP)：
 Under the DrugBank dataset folder<br>
 （1）run `train_test_splict_DTI-rand.R` to divide the testing set (SR, SD, SP, SDP) of DTI-rand dataset. <br>
 （2）run `train_test_splict_DTI-net.R` to divide the testing set (SR, SD, SP, SDP) of DTI-net dataset. <br>
 
-### The process of dividing the training/validation/testing set is as follows：
+##### The process of dividing the training/validation/testing set is as follows：
 Under the DrugBank dataset folder，run `train_valid_test_dataset.py` to divide the dataset into training/validation/testing set.
 
 Analysis of shortest path lengths in the heterogeneous network
