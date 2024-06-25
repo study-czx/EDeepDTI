@@ -80,5 +80,5 @@ In `main_data.py`.<br>
 （2）Run `Get_KEGG_ChEMBl_DTI.py` to get DTIs from ChEMBL and KEGG databases, and retain only the DTIs between drugs and proteins that exist in the DrugBank dataset.<br>
 （3）Run `analysis_scores_from_KEGG_ChEMBL.py` to obtain the distribution of prediction scores for all unknown drug-protein pairs and the distribution of prediction scores for DTIs from the KEGG and ChEMBL databases.
 
-For citation
-------
+4' For citation
+===
