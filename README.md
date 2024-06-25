@@ -45,9 +45,9 @@ EDeepDTI：A scalable and robust ensemble deep learning method for predicting dr
 ##### KEGG (case study/)
 `KEGG_DTI.txt` (drug-target interactions for case study) were downloaded from 'https://www.genome.jp/brite/br08906'.<br>
 
-3.2  Process of datasets
+3.2  Process of datasets (datasets_DTI/)
 ------
- First, the DrugBank dataset folder contains the files DTI_8207.csv, Drug_1520.csv, Protein_1771.csv.
+ We placed the useful data obtained from the raw data in the 'processed_data' folder and the final generated dataset and its features in the 'datasets' folder.
  
 ### The detailed steps for the construction of the DTI-net dataset are as follows:
 Under the DrugBank dataset folder<br>
