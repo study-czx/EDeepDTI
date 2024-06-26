@@ -17,7 +17,19 @@ for type in types:
                                         --save_path data/' + type + '/drug_smiles.npz \
                                         --features_generator rdkit_2d_normalized \
                                         --restart ')
+
     # change models 320 line 'mean' or 'max
+
+    # for feature_type in feature_types:
+    #     np_path = 'data/' + type + '/fp_' + feature_type + '.npz'
+    #     csv_path = 'data/' + type + '/grover_' + feature_type + '.csv'
+    #     # atom, bond, both
+    #     os.system('python main.py fingerprint --data_path ' + data_path + ' \
+    #                                    --features_path data/' + type + '/drug_smiles.npz \
+    #                                    --checkpoint_path model/grover_large.pt \
+    #                                    --fingerprint_source ' + feature_type + ' \
+    #                                    --output '+np_path)
+
     for feature_type in feature_types:
         np_path = 'data/' + type + '/fp_' + feature_type + '_max.npz'
         csv_path = 'data/' + type + '/grover_' + feature_type + '_max.csv'

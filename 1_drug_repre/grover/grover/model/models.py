@@ -317,6 +317,7 @@ class GroverFpGeneration(nn.Module):
         self.iscuda = args.cuda
 
         self.grover = GROVEREmbedding(args)
+        # self.readout = Readout(rtype="mean", hidden_size=args.hidden_size)
         self.readout = Readout(rtype="max", hidden_size=args.hidden_size)
         # self.readout = Readout(rtype="self_attention", hidden_size=args.hidden_size)
 
