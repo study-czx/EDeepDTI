@@ -3,14 +3,15 @@ import sklearn.metrics as skm
 import funcs
 import data_loader
 
+# DTI, CPI, Davis, KIBA
 dataset = 'DTI'
+# 'e', 'd', 's'
 input_type = 'e'
 predict_types = ['5_fold', 'new_drug', 'new_protein', 'new_drug_protein']
-# predict_types = ['new_protein', 'new_drug_protein']
+
 save_base = 'EDeepDTI'
 
 save_base = save_base + '-' + input_type
-# save_base = save_base
 
 def Get_metric():
     n_dr_feats, n_p_feats = data_loader.Get_feature_numbers(dataset, input_type)
@@ -98,7 +99,7 @@ def Get_metric():
         print(mean_acc, mean_auc, mean_aupr, mean_mcc, mean_f1, mean_recall, mean_precision)
         print(std_acc, std_auc, std_aupr, std_mcc, std_f1, std_recall, std_precision)
 
-# Get_metric()
+
 
 def Get_metric_all():
     n_dr_feats, n_p_feats = data_loader.Get_feature_numbers(dataset, input_type)
@@ -134,7 +135,7 @@ def Get_metric_all():
                                  format(test_precision, '.4f')]
                     for f in range(7):
                         output_score[f][k] = best_test[f]
-                # mean scores of 5 fold
+
                 print(output_score)
                 mean_acc, mean_auc, mean_aupr, mean_mcc, mean_f1, mean_recall, mean_precision = np.nanmean(
                     output_score[0]), np.nanmean(output_score[1]), np.nanmean(output_score[2]), np.nanmean(
@@ -150,10 +151,10 @@ def Get_metric_all():
         mean_scores = np.mean(all_scores)
         max_aupr_scores = np.max(all_aupr_scores)
         mean_aupr_scores = np.mean(all_aupr_scores)
-        print('最大AUC值为： ', round(max_scores, 4))
-        print('平均AUC值为： ', round(mean_scores, 4))
-        print('最大AUPR值为： ', round(max_aupr_scores, 4))
-        print('平均AUPR值为： ', round(mean_aupr_scores, 4))
+        print('max AUC： ', round(max_scores, 4))
+        print('mean AUC： ', round(mean_scores, 4))
+        print('max AUPR： ', round(max_aupr_scores, 4))
+        print('mean AUPR： ', round(mean_aupr_scores, 4))
 
-
+Get_metric()
 Get_metric_all()

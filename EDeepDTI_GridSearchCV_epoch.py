@@ -11,7 +11,7 @@ funcs.setup_seed(1)
 device = torch.device('cuda:0' if torch.cuda.is_available() else 'cpu')
 
 # Hyperparameters
-dataset_base = 'datasets/datasets/'
+dataset_base = 'datasets_DTI/datasets/'
 dataset = 'DTI'
 predict_type = '5_fold'
 input_type = 'e'

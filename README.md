@@ -34,6 +34,7 @@ sqlalchemy = 2.0.30<br>
 - Run `EDeepDTI.py` for DrugBank dataset, run `EDeepDTI_CPI.py` for CPI dataset, run `EDeepDTI_Davis_KIBA.py` for Davis and KIBA datasets <br>
 - For EDeepDTI, input_type = 'e'; for EDeepDTI-d, input_type = 'd'; for EDeepDTI-s, input_type = 's'.<br>
 - For prediction task SR, predict_type = '5_fold'; for task SD, predict_type = 'new_drug'; for task SP, predict_type = 'new_protein'; for task SDP, predict_type = 'new_drug_protein'.<br>
+- In `metric_test.py`, Run 'Get_metric()' to obtain the prediction results of EDeepDTI (or EDeepDTI-d, EDeepDTI-s). Run 'Get_metric_all()' to get the individual prediction results of all base learners and calculate the average and maximum AUC and AUPR of all base learners.
 - For grid search for hyperparameters, run `EDeepDTI_GridSearchCV.py` to determine the values of hyperparameters (`EDeepDTI_e_all_records.csv`), run `EDeepDTI_GridSearchCV_epoch.py` to determine the number of epochs (`EDeepDTI_e_all_records_epochs.csv`).<br>
 - Run `EDeepDTI_10fold.py` to get the prediction scores of all drug-protein pairs on the DrugBank dataset.
 
@@ -137,5 +138,5 @@ For the runtime environment of all pre-trained models and to download the pre-tr
 ## Citation
 
 ## Supplement
-Some data are too large (such as the features of compounds in the CPI dataset), so this part of the data is directly available in this GitHub repository. You can generate it using the code we provide.  
+Some data are too large (such as the features of compounds in the CPI dataset), so this part of the data is not directly available in this GitHub repository. You can generate it using the code we provide.  
 If you have any questions, please contact 6191611021@stu.jiangnan.edu.cn
