@@ -5,10 +5,9 @@ import data_loader
 
 dataset = 'DTI'
 input_type = 'e'
-# predict_types = ['5_fold', 'new_drug', 'new_protein', 'new_drug_protein']
-predict_types = ['5_fold']
+predict_types = ['5_fold', 'new_drug', 'new_protein', 'new_drug_protein']
 # predict_types = ['new_protein', 'new_drug_protein']
-save_base = 'EDDTI'
+save_base = 'EDeepDTI'
 
 save_base = save_base + '-' + input_type
 # save_base = save_base

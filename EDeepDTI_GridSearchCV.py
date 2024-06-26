@@ -11,20 +11,23 @@ funcs.setup_seed(1)
 device = torch.device('cuda:0' if torch.cuda.is_available() else 'cpu')
 
 # Hyperparameters
-dataset_base = 'datasets/datasets/'
+dataset_base = 'datasets_DTI/datasets/'
 dataset = 'DTI'
 predict_type = '5_fold'
-input_type = 's'
+input_type = 'e'
 
-lrs = [1e-4]
+# Grid search
+lrs = [1e-3, 1e-4, 1e-5]
 wds = [1e-3, 1e-4, 1e-5, 1e-6, 0]
-b_sizes = [128]
+b_sizes = [64, 128, 256]
+n_hiddens = [64, 128, 256]
 
-num_epoches = 200
 n_hiddens = [128]
+num_epoches = 200
 
 
-save_base = 'EDDTI-' + input_type
+
+save_base = 'EDeepDTI-' + input_type
 losses = nn.BCELoss()
 
 # get id map and features
@@ -34,7 +37,7 @@ print('number of drug feature types: ', n_dr_feats)
 print('number of protein feature types: ', n_p_feats)
 
 # make path
-model_save_path_base = 'models_grid2/' + save_base + '/' + dataset + '/' + predict_type
+model_save_path_base = 'models_grid4/' + save_base + '/' + dataset + '/' + predict_type
 funcs.Make_path(model_save_path_base)
 
 # start
@@ -204,4 +207,4 @@ for lr in lrs:
                     all_output_results = record
                 else:
                     all_output_results = pd.concat([all_output_results, record])
-                all_output_results.to_csv('EDDTI_s_all_records2.csv', index=False)
+                all_output_results.to_csv('EDeepDTI_e_all_records.csv', index=False)

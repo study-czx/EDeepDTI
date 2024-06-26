@@ -1,10 +1,10 @@
 
-<p align="center">
+
   <h3 align="center" style="font-size: 40px;">EDeepDTI：A scalable and robust ensemble deep learning method for predicting drug-target interactions</h3>
   <p align="justify" style="font-size: 18px;">
 In this study, we propose EDeepDTI, an ensemble deep learning-based framework for predicting DTIs. EDeepDTI utilizes several pre-trained models to generate features for both drugs and proteins. Multiple independent base learners are then trained on these features, and their predictions are aggregated to produce the final model prediction. Additionally, we introduce two variants of EDeepDTI, named EDeepDTI-d and EDeepDTI-s, which utilize traditional descriptor features and similarity features, respectively.
   </p>
-</p>
+
 
 ![image](model.jpg)
 
@@ -16,7 +16,9 @@ In this study, we propose EDeepDTI, an ensemble deep learning-based framework fo
   - [Process of datasets](#Process-of-datasets)
   - [Calculation of feature](#Calculation-of-feature)
   - [Case Study](#Case-Study)
+- [Other biological association prediction tasks](#Other-biological-association-prediction-tasks)
 - [Citation](#Citation)
+- [Supplement](#Supplement)
 
 ## Environment
 python = 3.8.19<br>
@@ -32,7 +34,7 @@ sqlalchemy = 2.0.30<br>
 - Run `EDeepDTI.py` for DrugBank dataset, run `EDeepDTI_CPI.py` for CPI dataset, run `EDeepDTI_Davis_KIBA.py` for Davis and KIBA datasets <br>
 - For EDeepDTI, input_type = 'e'; for EDeepDTI-d, input_type = 'd'; for EDeepDTI-s, input_type = 's'.<br>
 - For prediction task SR, predict_type = '5_fold'; for task SD, predict_type = 'new_drug'; for task SP, predict_type = 'new_protein'; for task SDP, predict_type = 'new_drug_protein'.<br>
-- For grid search for hyperparameters, run `EDeepDTI_GridSearchCV.py` to determine the values of hyperparameters, run `EDeepDTI_GridSearchCV_epoch.py` to determine the number of epochs.<br>
+- For grid search for hyperparameters, run `EDeepDTI_GridSearchCV.py` to determine the values of hyperparameters (`EDeepDTI_e_all_records.csv`), run `EDeepDTI_GridSearchCV_epoch.py` to determine the number of epochs (`EDeepDTI_e_all_records_epochs.csv`).<br>
 - Run `EDeepDTI_10fold.py` to get the prediction scores of all drug-protein pairs on the DrugBank dataset.
 
 ## Code-and-data
@@ -115,6 +117,17 @@ For the runtime environment of all pre-trained models and to download the pre-tr
 （1）In `cal_feature_sim.py`, run 'cal_finger_sim(data_types)' to calculate Jaccard similarity measures of five molecular fingerprints for DrugBank, Davis, and KIBA datasets; run 'cal_DDI_sim()' to calculate Jaccard similarity measures of DDIs for DrugBank dataset; run 'cal_PPI_sim(data_types)' to calculate Jaccard similarity measures of PPIs, and the topological similarities of the human PPI network for DrugBank, CPI, Davis, and KIBA datasets.<br>
 （2）Run `cal_GO_seq_sim.R` to calculate protein sequence similarity and three types of GO semantic similarities for DrugBank, CPI, Davis, and KIBA datasets.<br>
 
+### Other-biological-association-prediction-tasks  
+ * DDI prediction  
+（1）Run `datasets_for_DDI/Trans_DeepDDI_dataset.py` to map SMILES list to DrugBank id list.  
+（2）Run `EDeepDTI_for_DDI.py` to predict DDIs on the DeepDDI dataset.  
+ * PPI prediction  
+（1）Run `datasets_for_PPI/get_dataset.py` to get training, validation, and testing sets of S.cerevisiae dataset.  
+（2）Run `EDeepDTI_for_PPI.py` to predict PPIs on the S.cerevisiae dataset. 
+ * MDA prediction  
+（1）Run `datasets_for_MDA/get_train_valid_test.py` to get training, validation, and testing sets of S.cerevisiae dataset.  
+（2）Run `EDeepDTI_for_MDA.py` to predict MDAs on the MDA dataset. 
+
 ### Case-Study 
 (case study/)  
 （1）Run `EDeepDTI_10fold.py.py` to get the scores for all drug-protein pairs in the DrugBank dataset.<br>
@@ -123,3 +136,6 @@ For the runtime environment of all pre-trained models and to download the pre-tr
 
 ## Citation
 
+## Supplement
+Some data are too large (such as the features of compounds in the CPI dataset), so this part of the data is directly available in this GitHub repository. You can generate it using the code we provide.  
+If you have any questions, please contact 6191611021@stu.jiangnan.edu.cn

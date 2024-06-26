@@ -24,7 +24,7 @@ n_hidden = 128
 num_epoches = 200
 
 
-save_base = 'EDDTI-' + input_type
+save_base = 'EDeepDTI-' + input_type
 losses = nn.BCELoss()
 
 skf = StratifiedKFold(n_splits=10, shuffle=True)

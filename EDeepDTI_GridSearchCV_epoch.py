@@ -23,7 +23,7 @@ b_size = 128
 n_hidden = 256
 num_epoches = 300
 
-save_base = 'EDDTI-' + input_type
+save_base = 'EDeepDTI-' + input_type
 losses = nn.BCELoss()
 
 # get id map and features
@@ -200,4 +200,4 @@ for this_epoch in all_epochs:
         all_output_results = record
     else:
         all_output_results = pd.concat([all_output_results, record])
-all_output_results.to_csv('EDDTI_e_all_records_300.csv', index=False)
+all_output_results.to_csv('EDeepDTI_e_all_records_300.csv', index=False)

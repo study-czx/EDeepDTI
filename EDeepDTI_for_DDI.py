@@ -11,9 +11,9 @@ funcs.setup_seed(1)
 device = torch.device('cuda:0' if torch.cuda.is_available() else 'cpu')
 
 # Hyperparameters
-dataset_base = 'datasets_for_DDI_before/'
-datasets = ['zhang']
-dataset_dict = {'deep': 'DeepDDI', 'miner': 'ChChMiner', 'zhang': 'ZhangDDI'}
+dataset_base = 'datasets_for_DDI/'
+datasets = ['deep']
+dataset_dict = {'deep': 'DeepDDI'}
 
 lr = 1e-3
 wd = 1e-5
@@ -32,12 +32,10 @@ def Get_drug_embedding(data_type):
     grover_atom = np.loadtxt(emb_feature_path_dr + 'grover_atom.csv', dtype=float, delimiter=',')
     grover_bond = np.loadtxt(emb_feature_path_dr + 'grover_bond.csv', dtype=float, delimiter=',')
     molformer = np.loadtxt(emb_feature_path_dr + 'Molformer.csv', dtype=float, delimiter=',')
-    # molclr = np.loadtxt(emb_feature_path_dr + 'molclr_emb.csv', dtype=float, delimiter=',')
     chemberta_max = np.loadtxt(emb_feature_path_dr + 'ChemBERTa2_max.csv', dtype=float, delimiter=',')
     grover_atom_max = np.loadtxt(emb_feature_path_dr + 'grover_atom_max.csv', dtype=float, delimiter=',')
     grover_bond_max = np.loadtxt(emb_feature_path_dr + 'grover_bond_max.csv', dtype=float, delimiter=',')
     molformer_max = np.loadtxt(emb_feature_path_dr + 'Molformer_max.csv', dtype=float, delimiter=',')
-    # molclr_max = np.loadtxt(emb_feature_path_dr + 'molclr_emb_max.csv', dtype=float, delimiter=',')
     Dr_embedding = {'chemberta': chemberta, 'grover_atom': grover_atom, 'grover_bond': grover_bond,
                     'molformer': molformer, 'chemberta_max': chemberta_max, 'grover_atom_max': grover_atom_max,
                     'grover_bond_max': grover_bond_max, 'molformer_max': molformer_max}
@@ -61,7 +59,7 @@ def Get_sample(data, dr_id_map):
 
 
 for dataset in datasets:
-    if dataset == 'deep' or dataset == 'zhang':
+    if dataset == 'deep':
         b_size = 512
     else:
         b_size = 256
