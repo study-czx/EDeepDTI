@@ -2,7 +2,7 @@
 
   <h3 align="center" style="font-size: 40px;">A scalable and robust ensemble deep learning method for predicting drug-target interactions</h3>
   <p align="justify" style="font-size: 18px;">
-In this study, we propose EDeepDTI, an ensemble deep learning-based framework for predicting DTIs. EDeepDTI utilizes several pre-trained models to generate features for both drugs and proteins. Multiple independent base learners are then trained on these features, and their predictions are aggregated to produce the final model prediction. Additionally, we introduce two variants of EDeepDTI, named EDeepDTI-d and EDeepDTI-s, which utilize traditional descriptor features and similarity features, respectively.
+In this study, we propose EDeepDTI, an ensemble deep learning framework designed to enhance the generalization of DTI predictions. Additionally, we propose two model variants with different input features (EDeepDTI-d and EDeepDTI-s) to demonstrate the feature robustness of EDeepDTI, and three variants extended to other biological prediction tasks (EDeepDDI, EDeepPPI, and EDeepMDA) to showcase its scalability. EDeepDTI utilizes several pre-trained models to learn rich structural and semantic representations of drugs and proteins. Independent deep learning base learners are then trained on these features, with their predictions aggregated to produce the final output..
   </p>
 
 
