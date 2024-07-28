@@ -1,0 +1,41 @@
+REMARK SMILES N[C@@H](Cc1ccc(O)c(O)c1)C(=O)O
+REMARK SMILES IDX 3 1 2 2 1 3 12 6 13 7 14 8 4 10 11 11 5 12 9 13 6 14 7 15
+REMARK SMILES IDX 10 16 8 18
+REMARK H PARENT 1 4 1 5 14 9 10 17 8 19
+REMARK Flexibility Score: inf
+ROOT
+ATOM      1  C   UNL     1      -1.077   0.154  -0.976  1.00  0.00     0.066 C 
+ENDROOT
+BRANCH   1   2
+ATOM      2  C   UNL     1      -1.944   0.545   0.234  1.00  0.00     0.166 C 
+BRANCH   2   3
+ATOM      3  N   UNL     1      -1.945  -0.524   1.237  1.00  0.00    -0.318 NA
+ATOM      4  H   UNL     1      -2.511  -0.212   2.060  1.00  0.00     0.119 HD
+ATOM      5  H   UNL     1      -2.408  -1.375   0.842  1.00  0.00     0.119 HD
+ENDBRANCH   2   3
+BRANCH   2   6
+ATOM      6  C   UNL     1      -3.348   0.866  -0.206  1.00  0.00     0.320 C 
+ATOM      7  O   UNL     1      -4.068  -0.020  -0.741  1.00  0.00    -0.251 OA
+BRANCH   6   8
+ATOM      8  O   UNL     1      -3.852   2.150  -0.024  1.00  0.00    -0.480 OA
+ATOM      9  H   UNL     1      -4.794   2.384  -0.315  1.00  0.00     0.296 HD
+ENDBRANCH   6   8
+ENDBRANCH   2   6
+ENDBRANCH   1   2
+BRANCH   1  10
+ATOM     10  C   UNL     1       0.365  -0.036  -0.579  1.00  0.00    -0.042 A 
+ATOM     11  C   UNL     1       0.853  -1.313  -0.262  1.00  0.00     0.054 A 
+ATOM     12  C   UNL     1       1.221   1.072  -0.479  1.00  0.00     0.008 A 
+ATOM     13  C   UNL     1       2.184  -1.488   0.135  1.00  0.00     0.157 A 
+ATOM     14  C   UNL     1       2.550   0.902  -0.085  1.00  0.00     0.050 A 
+ATOM     15  C   UNL     1       3.039  -0.375   0.223  1.00  0.00     0.157 A 
+BRANCH  13  16
+ATOM     16  O   UNL     1       2.638  -2.771   0.438  1.00  0.00    -0.504 OA
+ATOM     17  H   UNL     1       3.591  -2.949   0.730  1.00  0.00     0.293 HD
+ENDBRANCH  13  16
+BRANCH  15  18
+ATOM     18  O   UNL     1       4.366  -0.542   0.616  1.00  0.00    -0.504 OA
+ATOM     19  H   UNL     1       5.001   0.244   0.687  1.00  0.00     0.293 HD
+ENDBRANCH  15  18
+ENDBRANCH   1  10
+TORSDOF 7

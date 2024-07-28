@@ -1,0 +1,35 @@
+REMARK SMILES CN1CCN(C(c2ccccc2)c2ccc(Cl)cc2)CC1
+REMARK SMILES IDX 6 1 5 2 1 3 2 4 3 5 21 6 4 7 20 8 7 9 8 10 12 11 9 12 11 13
+REMARK SMILES IDX 10 14 13 15 14 16 19 17 15 18 18 19 16 20 17 21
+REMARK H PARENT
+REMARK Flexibility Score: inf
+ROOT
+ATOM      1  C   UNL     1      -0.704   0.258  -0.836  1.00  0.00     0.117 C 
+ENDROOT
+BRANCH   1   2
+ATOM      2  N   UNL     1       0.748   0.301  -0.508  1.00  0.00    -0.290 NA
+ATOM      3  C   UNL     1       4.746   0.662   0.290  1.00  0.00     0.105 C 
+ATOM      4  N   UNL     1       3.310   0.583  -0.017  1.00  0.00    -0.304 NA
+ATOM      5  C   UNL     1       3.077  -0.310  -1.166  1.00  0.00     0.099 C 
+ATOM      6  C   UNL     1       2.557   0.116   1.168  1.00  0.00     0.099 C 
+ATOM      7  C   UNL     1       1.590  -0.280  -1.575  1.00  0.00     0.101 C 
+ATOM      8  C   UNL     1       1.106  -0.265   0.808  1.00  0.00     0.101 C 
+ENDBRANCH   1   2
+BRANCH   1   9
+ATOM      9  C   UNL     1      -1.311  -1.134  -0.649  1.00  0.00    -0.026 A 
+ATOM     10  C   UNL     1      -1.772  -1.575   0.609  1.00  0.00     0.006 A 
+ATOM     11  C   UNL     1      -1.410  -2.006  -1.749  1.00  0.00     0.006 A 
+ATOM     12  C   UNL     1      -2.313  -2.855   0.758  1.00  0.00     0.000 A 
+ATOM     13  C   UNL     1      -1.951  -3.286  -1.594  1.00  0.00     0.000 A 
+ATOM     14  C   UNL     1      -2.401  -3.710  -0.342  1.00  0.00     0.000 A 
+ENDBRANCH   1   9
+BRANCH   1  15
+ATOM     15  C   UNL     1      -1.492   1.350  -0.113  1.00  0.00    -0.026 A 
+ATOM     16  C   UNL     1      -2.899   1.369  -0.201  1.00  0.00     0.007 A 
+ATOM     17  C   UNL     1      -0.848   2.420   0.545  1.00  0.00     0.007 A 
+ATOM     18  C   UNL     1      -3.640   2.383   0.410  1.00  0.00     0.021 A 
+ATOM     19  C   UNL     1      -1.594   3.433   1.155  1.00  0.00     0.021 A 
+ATOM     20  C   UNL     1      -2.989   3.412   1.095  1.00  0.00     0.041 A 
+ATOM     21  Cl  UNL     1      -3.922   4.687   1.858  1.00  0.00    -0.084 Cl
+ENDBRANCH   1  15
+TORSDOF 3

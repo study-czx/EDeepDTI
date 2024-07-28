@@ -1,0 +1,54 @@
+REMARK SMILES O=C(OCCN1CCOCC1)c1cccnc1Nc1cccc(C(F)(F)F)c1
+REMARK SMILES IDX 2 1 1 2 12 3 17 4 16 5 13 6 15 7 14 8 18 9 19 11 23 12 28 13
+REMARK SMILES IDX 22 14 21 15 20 16 24 17 25 18 26 19 27 20 3 21 4 22 5 23
+REMARK SMILES IDX 6 24 7 25 11 26 8 27 10 28 9 29
+REMARK H PARENT 18 10
+REMARK Flexibility Score: inf
+ROOT
+ATOM      1  C   UNL     1       0.492   1.503   1.192  1.00  0.00     0.341 C 
+ATOM      2  O   UNL     1       0.024   2.012   0.136  1.00  0.00    -0.246 OA
+ENDROOT
+BRANCH   1   3
+ATOM      3  C   UNL     1      -0.394   0.781   2.132  1.00  0.00     0.102 A 
+ATOM      4  C   UNL     1      -1.586   0.138   1.716  1.00  0.00     0.144 A 
+ATOM      5  N   UNL     1      -2.382  -0.463   2.646  1.00  0.00    -0.238 NA
+ATOM      6  C   UNL     1      -0.062   0.756   3.496  1.00  0.00     0.021 A 
+ATOM      7  C   UNL     1      -2.078  -0.469   3.969  1.00  0.00     0.113 A 
+ATOM      8  C   UNL     1      -0.905   0.135   4.417  1.00  0.00     0.021 A 
+BRANCH   4   9
+ATOM      9  N   UNL     1      -1.924   0.019   0.324  1.00  0.00    -0.340 N 
+ATOM     10  H   UNL     1      -1.148  -0.139  -0.358  1.00  0.00     0.168 HD
+BRANCH   9  11
+ATOM     11  C   UNL     1      -3.276  -0.070  -0.160  1.00  0.00     0.040 A 
+ATOM     12  C   UNL     1      -4.842  -0.826  -1.876  1.00  0.00     0.058 A 
+ATOM     13  C   UNL     1      -3.533  -0.730  -1.372  1.00  0.00     0.039 A 
+ATOM     14  C   UNL     1      -5.890  -0.201  -1.179  1.00  0.00     0.013 A 
+ATOM     15  C   UNL     1      -5.638   0.473   0.018  1.00  0.00     0.003 A 
+ATOM     16  C   UNL     1      -4.339   0.541   0.527  1.00  0.00     0.026 A 
+BRANCH  12  17
+ATOM     17  C   UNL     1      -5.100  -1.504  -3.199  1.00  0.00     0.416 C 
+ATOM     18  F   UNL     1      -4.924  -0.589  -4.220  1.00  0.00    -0.166 F 
+ATOM     19  F   UNL     1      -6.392  -1.999  -3.254  1.00  0.00    -0.166 F 
+ATOM     20  F   UNL     1      -4.224  -2.560  -3.383  1.00  0.00    -0.166 F 
+ENDBRANCH  12  17
+ENDBRANCH   9  11
+ENDBRANCH   4   9
+ENDBRANCH   1   3
+BRANCH   1  21
+ATOM     21  O   UNL     1       1.849   1.652   1.501  1.00  0.00    -0.461 OA
+BRANCH  21  22
+ATOM     22  C   UNL     1       2.801   2.236   0.613  1.00  0.00     0.248 C 
+BRANCH  22  23
+ATOM     23  C   UNL     1       3.092   1.303  -0.566  1.00  0.00     0.126 C 
+BRANCH  23  24
+ATOM     24  N   UNL     1       3.473  -0.041  -0.071  1.00  0.00    -0.295 NA
+ATOM     25  C   UNL     1       4.931  -0.167   0.164  1.00  0.00     0.113 C 
+ATOM     26  C   UNL     1       2.988  -1.119  -0.954  1.00  0.00     0.113 C 
+ATOM     27  C   UNL     1       5.682  -0.704  -1.071  1.00  0.00     0.175 C 
+ATOM     28  C   UNL     1       3.764  -1.153  -2.293  1.00  0.00     0.175 C 
+ATOM     29  O   UNL     1       4.971  -0.411  -2.254  1.00  0.00    -0.379 OA
+ENDBRANCH  23  24
+ENDBRANCH  22  23
+ENDBRANCH  21  22
+ENDBRANCH   1  21
+TORSDOF 8

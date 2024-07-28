@@ -1,0 +1,33 @@
+REMARK SMILES COc1ccc2cc(CCC(C)=O)ccc2c1
+REMARK SMILES IDX 9 1 8 2 3 3 17 4 4 5 16 6 5 7 6 8 15 9 7 10 14 11 2 12 1 13
+REMARK SMILES IDX 10 14 11 15 12 16 13 17
+REMARK H PARENT
+REMARK Flexibility Score: inf
+ROOT
+ATOM      1  C   UNL     1      -2.650   0.572   0.307  1.00  0.00     0.043 C 
+ENDROOT
+BRANCH   1   2
+ATOM      2  C   UNL     1      -1.153   0.415   0.331  1.00  0.00    -0.047 A 
+ATOM      3  C   UNL     1       3.830   0.558  -0.617  1.00  0.00     0.119 A 
+ATOM      4  C   UNL     1       3.033  -0.114   0.331  1.00  0.00     0.055 A 
+ATOM      5  C   UNL     1       3.219   1.396  -1.556  1.00  0.00     0.047 A 
+ATOM      6  C   UNL     1       1.639   0.057   0.333  1.00  0.00    -0.015 A 
+ATOM      7  C   UNL     1       1.833   1.572  -1.562  1.00  0.00     0.012 A 
+ATOM      8  C   UNL     1       1.034   0.908  -0.621  1.00  0.00    -0.018 A 
+ATOM      9  C   UNL     1       0.839  -0.613   1.271  1.00  0.00     0.009 A 
+ATOM     10  C   UNL     1      -0.359   1.078  -0.619  1.00  0.00     0.012 A 
+ATOM     11  C   UNL     1      -0.547  -0.438   1.265  1.00  0.00     0.004 A 
+BRANCH   3  12
+ATOM     12  O   UNL     1       5.226   0.419  -0.659  1.00  0.00    -0.497 OA
+ATOM     13  C   UNL     1       5.981  -0.396   0.231  1.00  0.00     0.278 C 
+ENDBRANCH   3  12
+ENDBRANCH   1   2
+BRANCH   1  14
+ATOM     14  C   UNL     1      -3.286  -0.472  -0.616  1.00  0.00     0.080 C 
+BRANCH  14  15
+ATOM     15  C   UNL     1      -4.783  -0.334  -0.628  1.00  0.00     0.130 C 
+ATOM     16  C   UNL     1      -5.651  -1.422  -0.071  1.00  0.00     0.087 C 
+ATOM     17  O   UNL     1      -5.297   0.664  -1.112  1.00  0.00    -0.300 OA
+ENDBRANCH  14  15
+ENDBRANCH   1  14
+TORSDOF 4

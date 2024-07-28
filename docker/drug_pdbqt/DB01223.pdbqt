@@ -1,0 +1,21 @@
+REMARK SMILES Cn1c(=O)c2[nH]cnc2n(C)c1=O.Cn1c(=O)c2[nH]cnc2n(C)c1=O.NCCN
+REMARK SMILES IDX 28 1 27 2 29 5 30 6
+REMARK H PARENT 27 3 27 4 30 7 30 8
+REMARK Flexibility Score: inf
+ROOT
+ATOM      1  C   UNL     1       0.459  -0.458   0.053  1.00  0.00     0.092 C 
+ENDROOT
+BRANCH   1   2
+ATOM      2  N   UNL     1       1.789   0.056   0.361  1.00  0.00    -0.329 NA
+ATOM      3  H   UNL     1       2.445  -0.758   0.394  1.00  0.00     0.118 HD
+ATOM      4  H   UNL     1       2.101   0.656  -0.438  1.00  0.00     0.118 HD
+ENDBRANCH   1   2
+BRANCH   1   5
+ATOM      5  C   UNL     1      -0.570   0.678   0.102  1.00  0.00     0.092 C 
+BRANCH   5   6
+ATOM      6  N   UNL     1      -1.918   0.188  -0.180  1.00  0.00    -0.329 NA
+ATOM      7  H   UNL     1      -1.923  -0.262  -1.124  1.00  0.00     0.118 HD
+ATOM      8  H   UNL     1      -2.165  -0.546   0.524  1.00  0.00     0.118 HD
+ENDBRANCH   5   6
+ENDBRANCH   1   5
+TORSDOF 3

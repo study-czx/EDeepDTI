@@ -1,0 +1,41 @@
+REMARK SMILES Cc1ccc(C)c(OCCCC(C)(C)C(=O)O)c1
+REMARK SMILES IDX 10 1 9 2 8 3 7 4 1 5 2 6 18 7 3 8 4 9 5 10 6 11 11 12 12 13
+REMARK SMILES IDX 13 14 14 15 15 16 16 17 17 18
+REMARK H PARENT 17 19
+REMARK Flexibility Score: inf
+ROOT
+ATOM      1  C   UNL     1      -1.216  -1.012   1.193  1.00  0.00     0.043 C 
+ENDROOT
+BRANCH   1   2
+ATOM      2  C   UNL     1       0.280  -0.703   1.251  1.00  0.00     0.229 C 
+BRANCH   2   3
+ATOM      3  O   UNL     1       0.749  -0.351  -0.048  1.00  0.00    -0.493 OA
+BRANCH   3   4
+ATOM      4  C   UNL     1       2.072   0.006  -0.354  1.00  0.00     0.122 A 
+ATOM      5  C   UNL     1       5.479   0.355   1.329  1.00  0.00     0.044 C 
+ATOM      6  C   UNL     1       4.397   0.384   0.289  1.00  0.00    -0.047 A 
+ATOM      7  C   UNL     1       3.086   0.017   0.625  1.00  0.00     0.050 A 
+ATOM      8  C   UNL     1       4.705   0.709  -1.038  1.00  0.00     0.004 A 
+ATOM      9  C   UNL     1       3.707   0.701  -2.015  1.00  0.00     0.007 A 
+ATOM     10  C   UNL     1       2.387   0.359  -1.680  1.00  0.00    -0.009 A 
+ATOM     11  C   UNL     1       1.321   0.344  -2.739  1.00  0.00     0.048 C 
+ENDBRANCH   3   4
+ENDBRANCH   2   3
+ENDBRANCH   1   2
+BRANCH   1  12
+ATOM     12  C   UNL     1      -2.041   0.244   0.845  1.00  0.00     0.021 C 
+BRANCH  12  13
+ATOM     13  C   UNL     1      -3.548  -0.036   0.573  1.00  0.00     0.062 C 
+ATOM     14  C   UNL     1      -4.218  -0.640   1.830  1.00  0.00     0.023 C 
+ATOM     15  C   UNL     1      -4.244   1.298   0.242  1.00  0.00     0.023 C 
+BRANCH  13  16
+ATOM     16  C   UNL     1      -3.713  -0.956  -0.624  1.00  0.00     0.309 C 
+ATOM     17  O   UNL     1      -4.619  -1.833  -0.644  1.00  0.00    -0.252 OA
+BRANCH  16  18
+ATOM     18  O   UNL     1      -2.901  -0.789  -1.744  1.00  0.00    -0.481 OA
+ATOM     19  H   UNL     1      -3.011  -1.381  -2.559  1.00  0.00     0.296 HD
+ENDBRANCH  16  18
+ENDBRANCH  13  16
+ENDBRANCH  12  13
+ENDBRANCH   1  12
+TORSDOF 7

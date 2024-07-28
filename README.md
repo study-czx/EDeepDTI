@@ -130,10 +130,17 @@ For the runtime environment of all pre-trained models and to download the pre-tr
 （2）Run `EDeepDTI_for_MDA.py` to predict MDAs on the MDA dataset. 
 
 ### Case-Study 
-(case study/)  
+####  Analysis of prediction scores (case study/)
 （1）Run `EDeepDTI_10fold.py.py` to get the scores for all drug-protein pairs in the DrugBank dataset.<br>
 （2）Run `Get_KEGG_ChEMBl_DTI.py` to get DTIs from ChEMBL and KEGG databases, and retain only the DTIs between drugs and proteins that exist in the DrugBank dataset.<br>
 （3）Run `analysis_scores_from_KEGG_ChEMBL.py` to obtain the distribution of prediction scores for all unknown drug-protein pairs and the distribution of prediction scores for DTIs from the KEGG and ChEMBL databases.
+####  Molecular docking (docker/)
+（1）Get protein pdbqt files with PyMOL and MGLTools (proteins_pdbqt/).<br>
+（2）Run `get_drug_pdb.py` to get drug pdbqt files (drug_pdbqt/).<br>
+（3）Run `get_top_end_10drugs.py` to get top 10 and bottom 10 predicted drugs, and known interacting drugs of selected proteins.<br>
+（4）Run `main_dock.py` to perform batch docking of drugs with proteins based on Autodock Vina, and save the docking results (result_pdbqt/ and result_pdbqt_fixed/) and log files (result_log/).<br>
+（4）Run `show_results.py` to get binding affinities (affinity/).<br>
+（5）Get interaction types using the Protein-Ligand Interaction Profiler (PLIP) (complexes/*.pse).<br>
 
 ## Citation
 

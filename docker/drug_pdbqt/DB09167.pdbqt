@@ -1,0 +1,35 @@
+REMARK SMILES CN(C)CC/C=C1\c2ccccc2CSc2ccccc21
+REMARK SMILES IDX 4 1 2 2 1 3 3 4 5 5 6 6 7 7 8 8 21 9 9 10 13 11 16 12 20 13
+REMARK SMILES IDX 10 14 12 15 14 16 15 17 17 18 19 19 11 20 18 21
+REMARK H PARENT
+REMARK Flexibility Score: inf
+ROOT
+ATOM      1  C   UNL     1       2.593   0.090  -0.234  1.00  0.00     0.088 C 
+ENDROOT
+BRANCH   1   2
+ATOM      2  N   UNL     1       3.504  -0.860  -0.909  1.00  0.00    -0.309 NA
+ATOM      3  C   UNL     1       4.295  -0.185  -1.953  1.00  0.00     0.104 C 
+ATOM      4  C   UNL     1       4.413  -1.476   0.071  1.00  0.00     0.104 C 
+ENDBRANCH   1   2
+BRANCH   1   5
+ATOM      5  C   UNL     1       1.318   0.298  -1.060  1.00  0.00     0.043 C 
+BRANCH   5   6
+ATOM      6  C   UNL     1       0.301   1.091  -0.277  1.00  0.00    -0.016 C 
+ATOM      7  C   UNL     1      -0.798   0.573   0.321  1.00  0.00    -0.014 C 
+ATOM      8  C   UNL     1      -1.102  -0.867   0.180  1.00  0.00    -0.014 A 
+ATOM      9  C   UNL     1      -1.757   1.502   0.997  1.00  0.00    -0.004 A 
+ATOM     10  C   UNL     1      -0.342  -1.817   0.882  1.00  0.00     0.009 A 
+ATOM     11  C   UNL     1      -2.069  -1.295  -0.747  1.00  0.00    -0.030 A 
+ATOM     12  C   UNL     1      -3.166   1.512   0.753  1.00  0.00     0.015 A 
+ATOM     13  C   UNL     1      -1.213   2.523   1.808  1.00  0.00     0.010 A 
+ATOM     14  C   UNL     1      -0.535  -3.181   0.654  1.00  0.00     0.001 A 
+ATOM     15  C   UNL     1      -2.265  -2.671  -0.959  1.00  0.00     0.005 A 
+ATOM     16  C   UNL     1      -3.021  -0.297  -1.331  1.00  0.00     0.111 C 
+ATOM     17  S   UNL     1      -4.131   0.161   0.024  1.00  0.00    -0.121 SA
+ATOM     18  C   UNL     1      -3.935   2.587   1.225  1.00  0.00     0.016 A 
+ATOM     19  C   UNL     1      -2.008   3.559   2.296  1.00  0.00     0.001 A 
+ATOM     20  C   UNL     1      -1.490  -3.607  -0.271  1.00  0.00     0.000 A 
+ATOM     21  C   UNL     1      -3.362   3.604   1.985  1.00  0.00     0.001 A 
+ENDBRANCH   5   6
+ENDBRANCH   1   5
+TORSDOF 3

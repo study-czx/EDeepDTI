@@ -1,0 +1,42 @@
+REMARK SMILES C[C@](N)(Cc1ccc(O)c(O)c1)C(=O)O
+REMARK SMILES IDX 1 1 2 2 3 3 4 6 5 7 6 8 12 9 7 10 10 11 8 12 11 13 9 15
+REMARK SMILES IDX 13 17 14 18 15 19
+REMARK H PARENT 3 4 3 5 11 14 9 16 15 20
+REMARK Flexibility Score: inf
+ROOT
+ATOM      1  C   UNL     1      -1.624  -0.780   1.596  1.00  0.00     0.041 C 
+ATOM      2  C   UNL     1      -1.887  -0.210   0.188  1.00  0.00     0.115 C 
+ENDROOT
+BRANCH   2   3
+ATOM      3  N   UNL     1      -1.688  -1.285  -0.797  1.00  0.00    -0.316 NA
+ATOM      4  H   UNL     1      -2.383  -2.049  -0.628  1.00  0.00     0.119 HD
+ATOM      5  H   UNL     1      -1.859  -0.917  -1.762  1.00  0.00     0.119 HD
+ENDBRANCH   2   3
+BRANCH   2   6
+ATOM      6  C   UNL     1      -0.923   0.968  -0.116  1.00  0.00     0.069 C 
+BRANCH   6   7
+ATOM      7  C   UNL     1       0.535   0.566  -0.127  1.00  0.00    -0.042 A 
+ATOM      8  C   UNL     1       1.121   0.054  -1.293  1.00  0.00     0.008 A 
+ATOM      9  C   UNL     1       1.314   0.690   1.034  1.00  0.00     0.054 A 
+ATOM     10  C   UNL     1       2.463  -0.330  -1.297  1.00  0.00     0.050 A 
+ATOM     11  C   UNL     1       2.661   0.306   1.041  1.00  0.00     0.157 A 
+ATOM     12  C   UNL     1       3.243  -0.211  -0.141  1.00  0.00     0.157 A 
+BRANCH  11  13
+ATOM     13  O   UNL     1       3.375   0.453   2.232  1.00  0.00    -0.504 OA
+ATOM     14  H   UNL     1       4.348   0.206   2.341  1.00  0.00     0.293 HD
+ENDBRANCH  11  13
+BRANCH  12  15
+ATOM     15  O   UNL     1       4.579  -0.614  -0.211  1.00  0.00    -0.504 OA
+ATOM     16  H   UNL     1       5.223  -0.568   0.565  1.00  0.00     0.293 HD
+ENDBRANCH  12  15
+ENDBRANCH   6   7
+ENDBRANCH   2   6
+BRANCH   2  17
+ATOM     17  C   UNL     1      -3.311   0.314   0.131  1.00  0.00     0.323 C 
+ATOM     18  O   UNL     1      -4.057   0.052  -0.852  1.00  0.00    -0.250 OA
+BRANCH  17  19
+ATOM     19  O   UNL     1      -3.787   1.137   1.149  1.00  0.00    -0.480 OA
+ATOM     20  H   UNL     1      -4.729   1.510   1.118  1.00  0.00     0.296 HD
+ENDBRANCH  17  19
+ENDBRANCH   2  17
+TORSDOF 7

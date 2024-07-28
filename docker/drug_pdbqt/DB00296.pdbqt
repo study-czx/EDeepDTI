@@ -1,0 +1,37 @@
+REMARK SMILES CCCN1CCCC[C@H]1C(=O)Nc1c(C)cccc1C
+REMARK SMILES IDX 4 1 5 2 6 3 7 4 8 5 9 6 3 7 2 8 1 9 10 10 11 11 12 12 13 14
+REMARK SMILES IDX 14 15 19 16 15 17 16 18 18 19 20 20 17 21
+REMARK H PARENT 12 13
+REMARK Flexibility Score: inf
+ROOT
+ATOM      1  N   UNL     1       2.035  -0.357   0.106  1.00  0.00    -0.292 NA
+ATOM      2  C   UNL     1       3.295  -1.089   0.403  1.00  0.00     0.085 C 
+ATOM      3  C   UNL     1       3.369  -2.437  -0.322  1.00  0.00     0.016 C 
+ATOM      4  C   UNL     1       2.216  -3.362   0.104  1.00  0.00     0.003 C 
+ATOM      5  C   UNL     1       0.971  -2.584   0.565  1.00  0.00     0.029 C 
+ATOM      6  C   UNL     1       0.864  -1.234  -0.169  1.00  0.00     0.147 C 
+ENDROOT
+BRANCH   1   7
+ATOM      7  C   UNL     1       2.210   0.688  -0.933  1.00  0.00     0.085 C 
+BRANCH   7   8
+ATOM      8  C   UNL     1       2.254   2.079  -0.291  1.00  0.00     0.012 C 
+ATOM      9  C   UNL     1       3.499   2.294   0.565  1.00  0.00     0.005 C 
+ENDBRANCH   7   8
+ENDBRANCH   1   7
+BRANCH   6  10
+ATOM     10  C   UNL     1      -0.396  -0.526   0.249  1.00  0.00     0.241 C 
+ATOM     11  O   UNL     1      -0.542  -0.174   1.452  1.00  0.00    -0.273 OA
+ATOM     12  N   UNL     1      -1.406  -0.216  -0.721  1.00  0.00    -0.324 N 
+ATOM     13  H   UNL     1      -1.193  -0.345  -1.735  1.00  0.00     0.170 HD
+BRANCH  12  14
+ATOM     14  C   UNL     1      -2.613   0.475  -0.365  1.00  0.00     0.047 A 
+ATOM     15  C   UNL     1      -2.824   1.794  -0.823  1.00  0.00    -0.027 A 
+ATOM     16  C   UNL     1      -3.601  -0.163   0.422  1.00  0.00    -0.027 A 
+ATOM     17  C   UNL     1      -1.796   2.482  -1.680  1.00  0.00     0.046 C 
+ATOM     18  C   UNL     1      -4.004   2.469  -0.473  1.00  0.00     0.005 A 
+ATOM     19  C   UNL     1      -4.760   0.543   0.780  1.00  0.00     0.005 A 
+ATOM     20  C   UNL     1      -3.427  -1.578   0.906  1.00  0.00     0.046 C 
+ATOM     21  C   UNL     1      -4.960   1.849   0.331  1.00  0.00     0.001 A 
+ENDBRANCH  12  14
+ENDBRANCH   6  10
+TORSDOF 4

@@ -1,0 +1,38 @@
+REMARK SMILES Cc1ccc(C(=O)c2ccc(CC(=O)O)n2C)cc1
+REMARK SMILES IDX 17 1 16 2 11 3 10 4 9 5 8 6 12 7 13 8 14 9 15 10 6 12 7 13
+REMARK SMILES IDX 5 14 4 15 18 16 3 17 19 18 2 19 1 20
+REMARK H PARENT 15 11
+REMARK Flexibility Score: inf
+ROOT
+ATOM      1  C   UNL     1      -2.635   1.462   0.626  1.00  0.00     0.150 C 
+ATOM      2  N   UNL     1      -2.065   0.224   0.089  1.00  0.00    -0.344 N 
+ATOM      3  C   UNL     1      -2.737  -0.908  -0.230  1.00  0.00     0.029 A 
+ATOM      4  C   UNL     1      -1.871  -1.840  -0.770  1.00  0.00     0.024 A 
+ATOM      5  C   UNL     1      -0.623  -1.256  -0.785  1.00  0.00     0.032 A 
+ATOM      6  C   UNL     1      -0.772   0.015  -0.257  1.00  0.00     0.089 A 
+ENDROOT
+BRANCH   3   7
+ATOM      7  C   UNL     1      -4.222  -1.108  -0.107  1.00  0.00     0.176 C 
+BRANCH   7   8
+ATOM      8  C   UNL     1      -4.939  -0.349  -1.176  1.00  0.00     0.309 C 
+ATOM      9  O   UNL     1      -4.960  -0.790  -2.357  1.00  0.00    -0.252 OA
+BRANCH   8  10
+ATOM     10  O   UNL     1      -5.558   0.860  -0.875  1.00  0.00    -0.481 OA
+ATOM     11  H   UNL     1      -6.036   1.392  -1.592  1.00  0.00     0.296 HD
+ENDBRANCH   8  10
+ENDBRANCH   7   8
+ENDBRANCH   3   7
+BRANCH   6  12
+ATOM     12  C   UNL     1       0.310   1.025  -0.178  1.00  0.00     0.209 C 
+ATOM     13  O   UNL     1       0.024   2.242  -0.339  1.00  0.00    -0.287 OA
+BRANCH  12  14
+ATOM     14  C   UNL     1       1.725   0.641   0.048  1.00  0.00     0.024 A 
+ATOM     15  C   UNL     1       2.056  -0.493   0.811  1.00  0.00     0.012 A 
+ATOM     16  C   UNL     1       2.761   1.440  -0.467  1.00  0.00     0.012 A 
+ATOM     17  C   UNL     1       3.394  -0.836   1.028  1.00  0.00     0.004 A 
+ATOM     18  C   UNL     1       4.098   1.096  -0.249  1.00  0.00     0.004 A 
+ATOM     19  C   UNL     1       4.423  -0.055   0.484  1.00  0.00    -0.051 A 
+ATOM     20  C   UNL     1       5.857  -0.401   0.751  1.00  0.00     0.044 C 
+ENDBRANCH  12  14
+ENDBRANCH   6  12
+TORSDOF 5
