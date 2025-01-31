@@ -1,20 +1,25 @@
+import os
+
 import numpy as np
 import sklearn.metrics as skm
 import funcs
 import data_loader
+import pandas as pd
 
-# DTI, CPI, Davis, KIBA
 dataset = 'DTI'
-# 'e', 'd', 's'
 input_type = 'e'
-predict_types = ['5_fold', 'new_drug', 'new_protein', 'new_drug_protein']
-
-save_base = 'EDeepDTI'
+# predict_types = ['5_fold']
+# predict_types = ['5_fold']
+predict_types = ['5_fold']
+save_base = 'EDDTI'
 
 save_base = save_base + '-' + input_type
+# save_base = save_base
+name_map = {'EDDTI-e': 'EDeepDTI', 'EDDTI-d': 'EDeepDTI-d', 'EDDTI-s': 'EDeepDTI-s'}
 
 def Get_metric():
     n_dr_feats, n_p_feats = data_loader.Get_feature_numbers(dataset, input_type)
+    # n_dr_feats, n_p_feats = 9, 6
     if dataset == 'DTI' or dataset == 'CPI':
         for predict_type in predict_types:
             output_score = np.zeros(shape=(7, 5))
@@ -48,6 +53,13 @@ def Get_metric():
                 for m in range(7):
                     output_score[m][k] = best_test[m]
             # mean scores of 5 fold
+            output_score2 = pd.DataFrame(output_score).T
+            output_score2.columns = ['ACC',  'AUC', 'AUPR', 'MCC', 'F1', 'Recall', 'Precision']
+            pd_out = output_score2[['AUC', 'AUPR', 'ACC', 'MCC', 'F1']]
+            save_path = 'view_baseline_results/'+name_map[save_base]+'/'
+            if not os.path.exists(save_path):
+                os.makedirs(save_path)
+            pd_out.to_csv('view_baseline_results/'+name_map[save_base]+'/'+dataset + '_'+predict_type+'_score.csv', index=False)
             print(output_score)
             mean_acc, mean_auc, mean_aupr, mean_mcc, mean_f1, mean_recall, mean_precision = np.nanmean(
                 output_score[0]), np.nanmean(output_score[1]), np.nanmean(output_score[2]), np.nanmean(
@@ -88,6 +100,15 @@ def Get_metric():
                          format(test_precision, '.4f')]
             for m in range(7):
                 output_score[m][k] = best_test[m]
+            output_score2 = pd.DataFrame(output_score).T
+            output_score2.columns = ['ACC', 'AUC', 'AUPR', 'MCC', 'F1', 'Recall', 'Precision']
+            pd_out = output_score2[['AUC', 'AUPR', 'ACC', 'MCC', 'F1']]
+            save_path = 'view_baseline_results/' + name_map[save_base] + '/'
+            if not os.path.exists(save_path):
+                os.makedirs(save_path)
+            pd_out.to_csv(
+                'view_baseline_results/' + name_map[save_base] + '/' + dataset + '_score.csv',
+                index=False)
         # mean scores of 5 fold
         print(output_score)
         mean_acc, mean_auc, mean_aupr, mean_mcc, mean_f1, mean_recall, mean_precision = np.nanmean(
@@ -100,16 +121,16 @@ def Get_metric():
         print(std_acc, std_auc, std_aupr, std_mcc, std_f1, std_recall, std_precision)
 
 
-
 def Get_metric_all():
-    n_dr_feats, n_p_feats = data_loader.Get_feature_numbers(dataset, input_type)
+    # n_dr_feats, n_p_feats = data_loader.Get_feature_numbers(dataset, input_type)
+    n_dr_feats, n_p_feats = 10, 8
     for predict_type in predict_types:
         all_scores = []
         all_aupr_scores = []
         for i in range(n_dr_feats):
             for j in range(n_p_feats):
                 m = i * n_p_feats + j
-                print('药物序号为{}，蛋白序号为{}'.format(i+1,j+1))
+                print('药物序号为{}，蛋白序号为{}'.format(i+1, j+1))
                 output_score = np.zeros(shape=(7, 5))
                 for k in range(5):
                     fold_type = 'fold' + str(k + 1)
@@ -135,7 +156,7 @@ def Get_metric_all():
                                  format(test_precision, '.4f')]
                     for f in range(7):
                         output_score[f][k] = best_test[f]
-
+                # mean scores of 5 fold
                 print(output_score)
                 mean_acc, mean_auc, mean_aupr, mean_mcc, mean_f1, mean_recall, mean_precision = np.nanmean(
                     output_score[0]), np.nanmean(output_score[1]), np.nanmean(output_score[2]), np.nanmean(
@@ -147,14 +168,15 @@ def Get_metric_all():
                 print(std_acc, std_auc, std_aupr, std_mcc, std_f1, std_recall, std_precision)
                 all_scores.append(mean_auc)
                 all_aupr_scores.append(mean_aupr)
+        print(all_scores)
         max_scores = np.max(all_scores)
         mean_scores = np.mean(all_scores)
         max_aupr_scores = np.max(all_aupr_scores)
         mean_aupr_scores = np.mean(all_aupr_scores)
-        print('max AUC： ', round(max_scores, 4))
-        print('mean AUC： ', round(mean_scores, 4))
-        print('max AUPR： ', round(max_aupr_scores, 4))
-        print('mean AUPR： ', round(mean_aupr_scores, 4))
+        print('最大AUC值为： ', round(max_scores, 4))
+        print('平均AUC值为： ', round(mean_scores, 4))
+        print('最大AUPR值为： ', round(max_aupr_scores, 4))
+        print('平均AUPR值为： ', round(mean_aupr_scores, 4))
 
 Get_metric()
-Get_metric_all()
+# Get_metric_all()
