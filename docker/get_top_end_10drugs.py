@@ -14,7 +14,7 @@ def anti_join(data1, data2):
 
 
 def get_all_scores():
-    All_scores = pd.read_csv('../case study/All_scores_10fold_e.csv')
+    All_scores = pd.read_csv('../case study/All_scores_10fold_e.csv', header=None)
     Drug_id = pd.read_csv('../datasets_DTI/datasets/DTI/Drug_id.csv')
     Protein_id = pd.read_csv('../datasets_DTI/datasets/DTI/Protein_id.csv')
     All_scores.index = Drug_id['Drugbank_id'].values.tolist()
@@ -46,7 +46,7 @@ if __name__ == '__main__':
     print(len(all_scores), len(filter_scores))
     DTI_scores = pd.merge(DTI_scores, DrugBank_id_with_3D, on='Drugbank_id', how='inner')
 
-    analysis_proteins = ['O75469', 'P35968', 'P07949', 'Q00534', 'P29317', 'Q04912']
+    analysis_proteins = ['P00533', 'P53350']
     Make_path('dock_pairs')
     for this_protein in analysis_proteins:
         need_score = filter_scores[filter_scores['Uniprot_id'] == this_protein].sort_values(by='Score',

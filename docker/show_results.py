@@ -7,30 +7,55 @@ def Make_path(data_path):
     data_path = Path(data_path)
     if not data_path.exists():
         os.makedirs(data_path)
+
+
 def read_vina_results(filename):
     model1_info = None
+    affinities = []  # 存储前 5 个模式的结合能
     with open(filename, 'r') as file:
         lines = file.readlines()
+        start_reading = False  # 用于标记何时开始读取模式数据
+
         for line in lines:
-            if line.strip().startswith('1'):
+            # 识别表头行，下一行开始读取数据
+            if line.strip().startswith("-----+------------+----------+----------"):
+                start_reading = True
+                continue
+
+            if start_reading:
                 parts = line.split()
-                model1_info = {
-                    'mode': int(parts[0]),
-                    'affinity': float(parts[1]),
-                    'rmsd_lb': float(parts[2]),
-                    'rmsd_ub': float(parts[3])
-                }
-                break  # 只需要第一个模式的信息
-    return model1_info
+                if len(parts) >= 4:  # 确保数据格式正确
+                    mode = int(parts[0])
+                    affinity = float(parts[1])
+                    rmsd_lb = float(parts[2])
+                    rmsd_ub = float(parts[3])
+
+                    # 记录第一个模式的信息
+                    if mode == 1:
+                        model1_info = {
+                            'mode': mode,
+                            'affinity': affinity,
+                            'rmsd_lb': rmsd_lb,
+                            'rmsd_ub': rmsd_ub
+                        }
+
+                    # 记录前 5 个模式的结合能
+                    if mode <= 5:
+                        affinities.append(affinity)
+
+    # 计算前 5 个模式的平均结合能
+    mean_affinity_top5 = sum(affinities) / len(affinities) if affinities else None
+
+    return model1_info, mean_affinity_top5
 
 def get_protein_results(protein_pdb_name, drug_ids):
     record_pd = pd.DataFrame()
     for drug_id in drug_ids:
         # print(drug_id)
         result_log = 'result_log/' + drug_id + '_' + protein_pdb_name + '.txt'
-        info = read_vina_results(result_log)
+        info, mean_affinity_top5 = read_vina_results(result_log)
         best_affinity = info['affinity']
-        this_record = {'Uniprot_id': Uniprot_id, 'DrugBank_id': drug_id, 'Affinity': best_affinity}
+        this_record = {'Uniprot_id': Uniprot_id, 'DrugBank_id': drug_id, 'Affinity': best_affinity, 'Mean_5_poses': mean_affinity_top5}
         pd_record = pd.DataFrame([this_record])
         if record_pd.empty:
             record_pd = pd_record
@@ -42,8 +67,8 @@ def get_protein_results(protein_pdb_name, drug_ids):
 
 
 if __name__ == '__main__':
-    Uniprot_ids = ['O75469', 'P35968', 'P07949', 'Q00534', 'P29317', 'Q04912']
-    Uniprot_PDB_map = {'O75469': '7axe', 'P35968': '2xir',  'P07949': '4ckj', 'Q00534': '6oqo', 'P29317': '6q7d', 'Q04912': '3pls'}
+    Uniprot_ids = ['P00533', 'P53350']
+    Uniprot_PDB_map = {'P00533': '3poz', 'P53350': '4o6w'}
     Make_path('affinity/')
     for Uniprot_id in Uniprot_ids:
         print(Uniprot_id)

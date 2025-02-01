@@ -54,9 +54,8 @@ def fix_pdbqt_out(Uniprot_ids):
 
 if __name__ == '__main__':
     base_path = 'dock_pairs/'
-    Uniprot_ids = ['O75469', 'P35968', 'P07949', 'Q00534', 'P29317', 'Q04912']
-    Uniprot_PDB_map = {'O75469': '7axe', 'P35968': '2xir', 'P07949': '4ckj', 'Q00534': '6oqo', 'P29317': '6q7d',
-                       'Q04912': '3pls'}
+    Uniprot_ids = ['P00533', 'P53350']
+    Uniprot_PDB_map = {'P00533': '3poz', 'P53350': '4o6w'}
 
 
     for Uniprot_id in Uniprot_ids:
