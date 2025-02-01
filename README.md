@@ -118,17 +118,6 @@ For the runtime environment of all pre-trained models and to download the pre-tr
 （1）In `cal_feature_sim.py`, run 'cal_finger_sim(data_types)' to calculate Jaccard similarity measures of five molecular fingerprints for DrugBank, Davis, and KIBA datasets; run 'cal_DDI_sim()' to calculate Jaccard similarity measures of DDIs for DrugBank dataset; run 'cal_PPI_sim(data_types)' to calculate Jaccard similarity measures of PPIs, and the topological similarities of the human PPI network for DrugBank, CPI, Davis, and KIBA datasets.<br>
 （2）Run `cal_GO_seq_sim.R` to calculate protein sequence similarity and three types of GO semantic similarities for DrugBank, CPI, Davis, and KIBA datasets.<br>
 
-### Other-biological-association-prediction-tasks  
- * DDI prediction  
-（1）Run `datasets_for_DDI/Trans_DeepDDI_dataset.py` to map SMILES list to DrugBank id list.  
-（2）Run `EDeepDTI_for_DDI.py` to predict DDIs on the DeepDDI dataset.  
- * PPI prediction  
-（1）Run `datasets_for_PPI/get_dataset.py` to get training, validation, and testing sets of S.cerevisiae dataset.  
-（2）Run `EDeepDTI_for_PPI.py` to predict PPIs on the S.cerevisiae dataset. 
- * MDA prediction  
-（1）Run `datasets_for_MDA/get_train_valid_test.py` to get training, validation, and testing sets of S.cerevisiae dataset.  
-（2）Run `EDeepDTI_for_MDA.py` to predict MDAs on the MDA dataset. 
-
 ### Case-Study 
 ####  Analysis of prediction scores (case study/)
 （1）Run `EDeepDTI_10fold.py.py` to get the scores for all drug-protein pairs in the DrugBank dataset.<br>
