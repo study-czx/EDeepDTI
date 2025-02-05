@@ -59,7 +59,7 @@ sqlalchemy = 2.0.30<br>
 `9606.protein.links.full.v12.0_STRING.txt` (human protein-protein interactions) were downloaded from 'https://cn.string-db.org/cgi/download?sessionId=bq0JfjmKDFZ5&species_text=Homo+sapiens'.
  * Uniprot<br>
 (1) `uniprotkb_reviewed_2024_02_22.tsv` (protein amino acid sequences) were downloaded from 'https://www.uniprot.org/uniprotkb?query=reviewed%3Atrue&facets=model_organism%3A9606%2Creviewed%3Atrue';<br>
-(2)`uniprot_string_map.tsv` (UniProt-STRING id map) were obtained from 'https://www.uniprot.org/id-mapping'.<br>
+(2) `uniprot_string_map.tsv` (UniProt-STRING id map) were obtained from 'https://www.uniprot.org/id-mapping'.<br>
  * KEGG (case study/)<br>
 `KEGG_DTI.txt` (drug-target interactions for case study) were downloaded from 'https://www.genome.jp/brite/br08906'.<br>
 
@@ -91,7 +91,7 @@ For the runtime environment of all pre-trained models and to download the pre-tr
 （1）Run `get_chembert_a_features.py` to generate drug chemberta2-mtr and chemberta2-mlm features for DrugBank, CPI, Davis, and KIBA datasets.
  * MoLFormer (molformer/notebooks/pretrained_molformer/)  
 （1）Run `get_molformer_features.py` to generate drug molformer features for DrugBank, CPI, Davis, and KIBA datasets.
- * KGPT (KGPT)
+ * KGPT (KGPT/)
 （1）Run `My_KGPT.py` to generate drug kgpt features for DrugBank, Davis, and KIBA datasets, run `My_KGPT_CPI.py` to generate drug kgpt features for CPI datasets.
 （2）For selecting between max pooling and average pooling, refer to lines 326 and 327 in `KGPT/src/model/light.py`.
 
