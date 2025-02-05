@@ -68,14 +68,12 @@ def get_fingerprint(structures, type):
         m = Chem.MolFromSmiles(k)
         mols.append(m)
 
-    RDK_frame = get_RDKit_finger(num_drugs, mols)
-    print(RDK_frame)
     ECFP4_frame, FCFP4_frame = get_ECFP_FCFP_finger(mols)
     print(ECFP4_frame)
     print(FCFP4_frame)
     MACCS_frame = get_MACCS_finger(mols)
     print(MACCS_frame)
-    return MACCS_frame, RDK_frame, ECFP4_frame, FCFP4_frame
+    return MACCS_frame, ECFP4_frame, FCFP4_frame
 
 
 def write_csv(MACCS_data, RDK_data, ECFP4_data, FCFP4_data, type):
@@ -90,17 +88,17 @@ def write_csv(MACCS_data, RDK_data, ECFP4_data, FCFP4_data, type):
 def run_cal_drug_discriptor(dataset):
     if dataset == 'DTI':
         Drug_structure = pd.read_csv('datasets/DTI/drug_smiles.csv', sep=',', dtype=str)
-        DTI_MACCS_frame, DTI_RDK_frame, DTI_ECFP4_frame, DTI_FCFP4_frame = get_fingerprint(Drug_structure, type='DTI')
-        write_csv(DTI_MACCS_frame, DTI_RDK_frame, DTI_ECFP4_frame, DTI_FCFP4_frame, type='DTI')
+        DTI_MACCS_frame,  DTI_ECFP4_frame, DTI_FCFP4_frame = get_fingerprint(Drug_structure, type='DTI')
+        write_csv(DTI_MACCS_frame, DTI_ECFP4_frame, DTI_FCFP4_frame, type='DTI')
     elif dataset == 'CPI':
         Compound_structure = pd.read_csv('datasets/CPI/all_compound_smiles.csv', sep=',', dtype=str)
-        CPI_MACCS_frame, CPI_RDK_frame, CPI_ECFP4_frame, CPI_FCFP4_frame = get_fingerprint(Compound_structure, type='CPI')
-        write_csv(CPI_MACCS_frame, CPI_RDK_frame, CPI_ECFP4_frame, CPI_FCFP4_frame, type='CPI')
+        CPI_MACCS_frame, CPI_ECFP4_frame, CPI_FCFP4_frame = get_fingerprint(Compound_structure, type='CPI')
+        write_csv(CPI_MACCS_frame, CPI_ECFP4_frame, CPI_FCFP4_frame, type='CPI')
     elif dataset == 'Davis' or dataset == 'KIBA':
         data_type = dataset + '_5fold'
         Compound_structure = pd.read_csv('datasets/'+data_type+'/Drug.csv', sep=',', dtype=str)
-        CPI_MACCS_frame, CPI_RDK_frame, CPI_ECFP4_frame, CPI_FCFP4_frame = get_fingerprint(Compound_structure, type='DK')
-        write_csv(CPI_MACCS_frame, CPI_RDK_frame, CPI_ECFP4_frame, CPI_FCFP4_frame, type=data_type)
+        CPI_MACCS_frame,  CPI_ECFP4_frame, CPI_FCFP4_frame = get_fingerprint(Compound_structure, type='DK')
+        write_csv(CPI_MACCS_frame, CPI_ECFP4_frame, CPI_FCFP4_frame, type=data_type)
 
 
 datasets = ['DTI', 'CPI', 'Davis', 'KIBA']
