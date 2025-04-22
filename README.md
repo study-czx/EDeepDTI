@@ -131,4 +131,4 @@ For the runtime environment of all pre-trained models and to download the pre-tr
 
 ## Supplement
 Some data are too large (such as the features of compounds in the CPI dataset), so this part of the data is not directly available in this GitHub repository. You can generate it using the code we provide.  
-If you have any questions, please contact 6191611021@stu.jiangnan.edu.cn
+If you have any questions, please contact us
