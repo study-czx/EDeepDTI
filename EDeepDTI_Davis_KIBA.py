@@ -146,6 +146,9 @@ def main(input_type, dataset):
         print(f"Total validation time: {total_validation_time / n_jobs:.2f} seconds")
         time2 = time.time()
         print('time: ', time2 - time1)
+
+    funcs.greedy_forward_feature_selection_validation(model_save_path_base, n_dr_feats, n_p_feats, input_type, dataset)
+
     print('start test')
     for k in range(5):
         fold_type = 'fold' + str(k + 1)
@@ -174,15 +177,23 @@ def main(input_type, dataset):
         max_concurrent_processes = n_jobs  # 设置同时运行的最大进程数
         with mp.Pool(max_concurrent_processes) as pool:
             pool.map(test_worker_with_id, args_list)
-    result_out = get_result(model_save_path_base, n_dr_feats, n_p_feats)
+
     save_path = 'view_baseline_results/' + name_map[save_base] + '/'
     if not os.path.exists(save_path):
         os.makedirs(save_path)
-    result_out.to_csv(
-        'view_baseline_results/' + name_map[save_base] + '/' + dataset + '_score.csv',
-        index=False)
+
+    result_out = get_result(model_save_path_base, n_dr_feats, n_p_feats)
+    # result_out.to_csv('view_baseline_results/' + name_map[save_base] + '/' + dataset + '_score_origin.csv', index=False)
+    print('all base learners:')
     print(result_out)
 
+    result_greedy = funcs.evaluate_greedy_selected_features_on_test(model_save_path_base, n_dr_feats, n_p_feats,
+                                                                    model_save_path_base)
+    result_greedy.to_csv(save_path + dataset + '_score.csv', index=False)
+    print('greedy forward base learners:')
+    print(result_greedy)
+    for metric, value in result_greedy.mean().items():
+        print(f"{metric}: {value:.4f}")
 
 
 if __name__ == '__main__':

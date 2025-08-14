@@ -4,7 +4,7 @@ import pandas as pd
 baseline_list = ['DeepCPI', 'DeepConv-DTI', 'MolTrans', 'TransformerCPI', 'DLM-DTI',  'HyperAttentionDTI', 'MCANet', 'FMCA-DTI',
                  'DrugBAN', 'CmhAttCPI', 'BINDTI', 'MGNDTI', 'DeepDTA', 'DeepCDA', 'GraphDTA']
 
-my_method_list = ['EDeepDTI', 'EDeepDTI-d', 'EDeepDTI-s']
+my_method_list = ['EDeepDTI', 'EDeepDTI-d']
 
 dataset_list1 = ['DTI', 'CPI']
 dataset_list2 = ['Davis', 'KIBA']

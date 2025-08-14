@@ -107,24 +107,3 @@ def test_model(n_dr_f, n_p_f, model_save_path, model_number, test_loader, drug_f
     test_scores_pandas = pd.DataFrame(test_scores)
     test_scores_pandas.to_csv(data_save_path + '/test_scores' + str(model_number) + '.csv',
                               index=False)
-
-def get_result(model_save_path_base, n_dr_feats, n_p_feats):
-    output_score = np.zeros(shape=(7, 5))
-    for k in range(5):
-        fold_type = 'fold' + str(k + 1)
-        model_save_path = model_save_path_base + '/' + fold_type
-        all_labels = np.loadtxt(model_save_path + '/test_labels.csv', skiprows=1)
-        all_output_scores = []
-        for i in range(n_dr_feats):
-            for j in range(n_p_feats):
-                model_number = i * n_p_feats + j
-                this_scores = np.loadtxt(model_save_path + '/test_scores' + str(model_number) + '.csv',skiprows=1)
-                all_output_scores.append(this_scores)
-        all_output_scores = list(np.mean(np.array(all_output_scores), axis=0))
-        best_test = funcs.get_metric(all_labels, all_output_scores)
-        for m in range(7):
-            output_score[m][k] = best_test[m]
-    output_score2 = pd.DataFrame(output_score).T
-    output_score2.columns = ['ACC', 'AUC', 'AUPR', 'MCC', 'F1', 'Recall', 'Precision']
-    pd_out = output_score2[['AUC', 'AUPR', 'ACC', 'MCC', 'F1']]
-    return pd_out

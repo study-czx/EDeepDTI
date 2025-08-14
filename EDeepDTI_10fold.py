@@ -6,7 +6,7 @@ import pandas as pd
 import data_loader
 from model import DNNNet
 import torch.multiprocessing as mp
-from train_test import train_model, test_model, get_result
+from train_test import train_model, test_model
 import os
 import time
 from sklearn.model_selection import StratifiedKFold

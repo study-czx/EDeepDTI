@@ -9,7 +9,9 @@ import os
 
 os.environ['CUDA_LAUNCH_BLOCKING'] = '1'
 
-model_types = ['MTR', 'MLM']
+# model_types = ['MTR', 'MLM']
+model_types = ['MLM']
+
 device = torch.device('cuda:0' if torch.cuda.is_available() else 'cpu')
 
 for model_type in model_types:

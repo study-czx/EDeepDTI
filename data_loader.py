@@ -9,14 +9,12 @@ def Get_feature_numbers(data_type, input_type):
     if input_type == 'd':
         n_dr_feats, n_p_feats = 4, 5
     elif input_type == 'e':
-        n_dr_feats, n_p_feats = 9, 6
-    elif input_type == 's':
         if data_type == 'DTI':
-            n_dr_feats, n_p_feats = 5, 6
+            n_dr_feats, n_p_feats = 13, 12
         elif data_type == 'CPI':
-            n_dr_feats, n_p_feats = 9, 6
+            n_dr_feats, n_p_feats = 8, 12
         else:
-            n_dr_feats, n_p_feats = 4, 6
+            n_dr_feats, n_p_feats = 12, 12
     # print('number of drug feature types: ', n_dr_feats)
     # print('number of protein feature types: ', n_p_feats)
     return n_dr_feats, n_p_feats
@@ -94,7 +92,7 @@ def Get_protein_sim(data_type):
 def Get_drug_embedding(data_type):
     _, _, _, _, emb_feature_path_dr, _ = Get_data_path(data_type)
     chemberta2 = np.loadtxt(emb_feature_path_dr + 'ChemBERTa2_emb.csv', dtype=float, delimiter=',')
-    chemberta2_mtr = np.loadtxt(emb_feature_path_dr + 'ChemBERTa2_emb_MTR.csv', dtype=float, delimiter=',')
+    # chemberta2_mtr = np.loadtxt(emb_feature_path_dr + 'ChemBERTa2_emb_MTR.csv', dtype=float, delimiter=',')
     molformer = np.loadtxt(emb_feature_path_dr + 'Molformer_emb.csv', dtype=float, delimiter=',')
     grover = np.loadtxt(emb_feature_path_dr + 'grover.csv', dtype=float, delimiter=',')
     kpgt = np.loadtxt(emb_feature_path_dr + 'kpgt_emb.csv', dtype=float, delimiter=',')
@@ -105,7 +103,7 @@ def Get_drug_embedding(data_type):
     # molformer_max = np.loadtxt(emb_feature_path_dr + 'Molformer_emb_max.csv', dtype=float, delimiter=',')
     # kpgt_max = np.loadtxt(emb_feature_path_dr + 'kpgt_emb_max.csv', dtype=float, delimiter=',')
 
-    Dr_embedding = {'chemberta2': chemberta2, 'chemberta2_mtr': chemberta2_mtr,'molformer': molformer, 'grover': grover, 'kpgt': kpgt}
+    Dr_embedding = {'chemberta2': chemberta2, 'molformer': molformer, 'grover': grover, 'kpgt': kpgt}
     return Dr_embedding
 
 
@@ -154,15 +152,12 @@ def Get_feature(data_type, input_type):
         Dr_finger = Get_finger(data_type)
         Dr_embedding, P_embedding = Get_drug_embedding(data_type), Get_protein_embedding(data_type)
         Dr_finger.update(Dr_embedding)
-        return dr_id_map, p_id_map, Dr_finger, P_embedding
-    elif input_type == 's':
         if data_type == 'CPI':
-            Dr_finger = Get_finger(data_type)
-            Dr_embedding, P_embedding = Get_drug_embedding(data_type), Get_protein_embedding(data_type)
-            Dr_finger.update(Dr_embedding)
             P_sim = Get_protein_sim(data_type)
-            return dr_id_map, p_id_map, Dr_finger, P_sim
+            P_embedding.update(P_sim)
         else:
             Dr_sim, P_sim = Get_drug_sim(data_type), Get_protein_sim(data_type)
-            return dr_id_map, p_id_map, Dr_sim, P_sim
+            Dr_finger.update(Dr_sim)
+            P_embedding.update(P_sim)
+        return dr_id_map, p_id_map, Dr_finger, P_embedding
 

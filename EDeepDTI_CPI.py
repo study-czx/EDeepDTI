@@ -19,7 +19,7 @@ device = torch.device('cuda:0' if torch.cuda.is_available() else 'cpu')
 dataset_base = 'datasets_DTI/datasets/'
 datasets = ['CPI']
 predict_types = ['5_fold', 'new_drug', 'new_protein', 'new_drug_protein']
-input_types = ['e', 'd', 's']
+input_types = ['e', 'd']
 
 lr = 1e-3
 wd = 1e-5
@@ -168,6 +168,9 @@ def main(input_type, dataset, predict_type):
             print(f"Total validation time: {total_validation_time / n_jobs:.2f} seconds")
             time2 = time.time()
             print('time: ', time2 - time1)
+
+        # greedy_forward_feature_selection
+        funcs.greedy_forward_feature_selection_validation(model_save_path_base, n_dr_feats, n_p_feats, input_type, dataset)
     #
     # # test
     if predict_type == 'new_protein' or predict_type == 'new_drug_protein':
@@ -178,7 +181,6 @@ def main(input_type, dataset, predict_type):
         data_save_path_base = model_save_path_base
 
     del train_drug_embedding_list, train_protein_embedding_list
-
 
     for k in range(5):
         fold_type = 'fold' + str(k + 1)
@@ -208,12 +210,25 @@ def main(input_type, dataset, predict_type):
                 args = (m, n, drug_embedding_list[m], protein_embedding_list[n], drug_name_list[m], protein_name_list[n],
                 test_loader, n_dr_feats, n_p_feats, model_save_path, device, data_save_path)
                 test_worker_with_id(args)
-    result_out = get_result(data_save_path_base, n_dr_feats, n_p_feats)
+
     save_path = 'view_baseline_results/' + name_map[save_base] + '/'
     if not os.path.exists(save_path):
         os.makedirs(save_path)
-    result_out.to_csv('view_baseline_results/' + name_map[save_base] + '/' + dataset + '_' + predict_type + '_score.csv', index=False)
+
+    result_out = get_result(data_save_path_base, n_dr_feats, n_p_feats)
+    # result_out.to_csv(
+    #     'view_baseline_results/' + name_map[save_base] + '/' + dataset + '_' + predict_type + '_score_origin.csv', index=False)
+    print('all base learners:')
     print(result_out)
+
+    result_greedy = funcs.evaluate_greedy_selected_features_on_test(model_save_path_base, n_dr_feats, n_p_feats, data_save_path_base)
+    result_greedy.to_csv(save_path + dataset + '_' + predict_type + '_score.csv', index=False)
+    print('greedy forward base learners:')
+    print(result_greedy)
+    for metric, value in result_greedy.mean().items():
+        print(f"{metric}: {value:.4f}")
+
+
 
 
 if __name__ == '__main__':

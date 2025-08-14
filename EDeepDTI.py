@@ -6,7 +6,7 @@ import pandas as pd
 import data_loader
 from model import DNNNet
 import torch.multiprocessing as mp
-from train_test import train_model, test_model, get_result
+from train_test import train_model, test_model
 import os
 import time
 
@@ -18,7 +18,7 @@ dataset_base = 'datasets_DTI/datasets/'
 datasets = ['DTI']
 
 predict_types = ['5_fold', 'new_drug', 'new_protein', 'new_drug_protein']
-input_types = ['e', 's', 'd']
+input_types = ['e', 'd']
 
 lr = 1e-3
 wd = 1e-5
@@ -152,6 +152,9 @@ def main(input_type, dataset, predict_type):
         print(f"Total training time: {all_time*f1:.2f} seconds")
         print(f"Total validation time: {all_time*f2:.2f} seconds")
 
+    # greedy_forward_feature_selection
+    funcs.greedy_forward_feature_selection_validation(model_save_path_base, n_dr_feats, n_p_feats, input_type, dataset)
+
     print('start test')
     for k in range(5):
         fold_type = 'fold' + str(k + 1)
@@ -173,19 +176,33 @@ def main(input_type, dataset, predict_type):
         for m in range(n_dr_feats):
             for n in range(n_p_feats):
                 model_count = m * n_p_feats + n
-                args = (m, n, drug_embedding_list[m], protein_embedding_list[n], drug_name_list[m], protein_name_list[n],
+                args = (m, n, drug_embedding_list[m], protein_embedding_list[n], drug_name_list[m],
+                        protein_name_list[n],
                         test_loader_list[model_count], n_dr_feats, n_p_feats, model_save_path, device, data_save_path)
                 args_list.append(args)
         # 控制最大并发数
         max_concurrent_processes = n_jobs  # 设置同时运行的最大进程数
         with mp.Pool(max_concurrent_processes) as pool:
             pool.map(test_worker_with_id, args_list)
-    result_out = get_result(model_save_path_base, n_dr_feats, n_p_feats)
+
+
     save_path = 'view_baseline_results/' + name_map[save_base] + '/'
-    if not os.path.exists(save_path):
-        os.makedirs(save_path)
-    result_out.to_csv('view_baseline_results/' + name_map[save_base] + '/' + dataset + '_' + predict_type + '_score.csv', index=False)
-    print(result_out)
+    # result_out = funcs.get_result(model_save_path_base, n_dr_feats, n_p_feats)
+    # if not os.path.exists(save_path):
+    #     os.makedirs(save_path)
+    # result_out.to_csv('view_baseline_results/' + name_map[save_base] + '/' + dataset + '_' + predict_type + '_score_origin.csv', index=False)
+    # print('all base learners:')
+    # print(result_out)
+    # for metric, value in result_out.mean().items():
+    #     print(f"{metric}: {value:.4f}")
+
+    result_greedy = funcs.evaluate_greedy_selected_features_on_test(model_save_path_base, n_dr_feats, n_p_feats,
+                                                                    model_save_path_base)
+    result_greedy.to_csv(save_path + dataset + '_' + predict_type + '_score.csv', index=False)
+    print('greedy forward base learners:')
+    print(result_greedy)
+    for metric, value in result_greedy.mean().items():
+        print(f"{metric}: {value:.4f}")
 
 
 if __name__ == '__main__':

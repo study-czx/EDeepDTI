@@ -6,11 +6,11 @@ import sklearn.metrics as skm
 import numpy as np
 import funcs
 
-my_method_list = ['EDeepDTI', 'EDeepDTI-d', 'EDeepDTI-s']
+my_method_list = ['EDeepDTI', 'EDeepDTI-d']
 
 dataset_list1 = ['DTI', 'CPI']
-input_types = ['e', 'd', 's']
-name_map = {'e': 'EDeepDTI', 'd': 'EDeepDTI-d', 's': 'EDeepDTI-s'}
+input_types = ['e', 'd']
+name_map = {'e': 'EDeepDTI', 'd': 'EDeepDTI-d'}
 
 predict_type = '5_fold'
 

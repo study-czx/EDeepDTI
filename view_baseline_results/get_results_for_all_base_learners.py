@@ -12,7 +12,7 @@ input_types = ['e', 'd', 's']
 predict_type = '5_fold'
 
 # save_base = save_base
-name_map = {'EDDTI-e': 'EDeepDTI', 'EDDTI-d': 'EDeepDTI-d', 'EDDTI-s': 'EDeepDTI-s'}
+name_map = {'EDDTI-e': 'EDeepDTI', 'EDDTI-d': 'EDeepDTI-d'}
 type_map = {'5_fold': 'SR', 'new_drug': 'SD', 'new_protein': 'SP', 'new_drug_protein': 'SDP'}
 
 metric_list = ['AUC', 'AUPR']

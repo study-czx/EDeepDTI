@@ -78,8 +78,8 @@ if __name__ == '__main__':
         cal_pairs1 = pd.read_csv(base_path + 'pairs_top_end_' + Uniprot_id + '.csv')
         cal_pairs2 = pd.read_csv(base_path + 'pairs_DTI_' + Uniprot_id + '.csv')
         drug_ids1 = cal_pairs1['Drugbank_id'].to_list()
-        drug_ids_top = drug_ids1[0:10]
-        drug_ids_end = drug_ids1[10:20]
+        drug_ids_top = drug_ids1[0:30]
+        drug_ids_end = drug_ids1[30:60]
         drug_ids_DTI = cal_pairs2['Drugbank_id'].to_list()
         results_top = get_protein_results(protein_pdb_name, drug_ids_top)
         results_end = get_protein_results(protein_pdb_name, drug_ids_end)

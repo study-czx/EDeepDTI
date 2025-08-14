@@ -7,6 +7,7 @@ import pandas as pd
 import data_loader
 import pytorch_lightning as pl
 
+# change hidden1, hidden2, and hidden 3
 hidden1, hidden2, hidden3 = 256, 128, 64
 
 class DNNNet(pl.LightningModule):
@@ -41,11 +42,11 @@ input_type = 'e'
 
 # Grid search
 # 针对单个值进行，其余值固定
-# lrs = [1e-3, 1e-4, 1e-5]
-# wds = [1e-3, 1e-4, 1e-5, 1e-6, 0]
-lrs = [1e-3]
-wds = [1e-5]
-num_epoches = 200
+lrs = [1e-3, 1e-4, 1e-5]
+wds = [1e-3, 1e-4, 1e-5, 1e-6, 0]
+# lrs = [1e-3]
+# wds = [1e-5]
+num_epoches = 300
 
 b_sizes = [128]
 n_hiddens = [128]
@@ -213,33 +214,20 @@ for lr in lrs:
                             test_scores_pandas.to_csv(model_save_path + '/test_scores' + str(model_number) + '.csv',
                                                       index=False)
 
-                output_score = np.zeros(shape=(7, 5))
-                for k in range(5):
-                    fold_type = 'fold' + str(k + 1)
-                    model_save_path = model_save_path_base + '/' + fold_type
-                    all_labels = np.loadtxt(model_save_path + '/test_labels.csv', skiprows=1)
-                    all_output_scores = []
-                    for i in range(n_dr_feats):
-                        for j in range(n_p_feats):
-                            model_number = i * n_p_feats + j
-                            this_scores = np.loadtxt(model_save_path + '/test_scores' + str(model_number) + '.csv',
-                                                     skiprows=1)
-                            all_output_scores.append(this_scores)
-                    all_output_scores = list(np.mean(np.array(all_output_scores), axis=0))
-                    best_test = funcs.get_metric(all_labels, all_output_scores)
-                    for m in range(7):
-                        output_score[m][k] = best_test[m]
-                mean_acc, mean_auc, mean_aupr, mean_mcc, mean_f1, mean_recall, mean_precision = funcs.show_metric(
-                    output_score, base_path, input_type)
+                funcs.greedy_forward_feature_selection_validation(model_save_path_base, n_dr_feats, n_p_feats,
+                                                                  input_type, dataset)
+                result_greedy = funcs.evaluate_greedy_selected_features_on_test(model_save_path_base, n_dr_feats,
+                                                                                n_p_feats, model_save_path_base)
 
-                this_dict = {'lr': lr, 'wd': wd, 'b_size': b_size, 'n_hidden': n_hidden, 'mean_acc': mean_acc,
-                             'mean_auc': mean_auc, 'mean_aupr': mean_aupr, 'mean_mcc': mean_mcc,
-                             'mean_f1': mean_f1, 'mean_recall': mean_recall, 'mean_precision': mean_precision,
-                             'hidden1': hidden1, 'hidden2': hidden2, 'hidden3': hidden3}
+                this_dict = {'lr': lr, 'wd': wd, 'b_size': b_size, 'n_hidden': n_hidden,
+                             'hidden1': hidden1, 'hidden2': hidden2, 'hidden3': hidden3,
+                             'mean_auc': result_greedy['AUC'].mean(), 'mean_aupr': result_greedy['AUPR'].mean(),
+                             'mean_acc': result_greedy['ACC'].mean(), 'mean_mcc': result_greedy['MCC'].mean(),
+                             'mean_f1': result_greedy['F1'].mean()}
                 record = pd.DataFrame.from_dict(this_dict, orient='index').T
                 print(record)
                 if all_output_results.empty:
                     all_output_results = record
                 else:
                     all_output_results = pd.concat([all_output_results, record])
-                all_output_results.to_csv('EDDTI_e_all_records.csv', index=False)
+                all_output_results.to_csv('EDeepDTI_all_records.csv', index=False)
