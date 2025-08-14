@@ -10,6 +10,7 @@ from train_test import train_model, test_model
 import os
 import time
 from sklearn.model_selection import StratifiedKFold
+import json
 
 funcs.setup_seed(1)
 device = torch.device('cuda:0' if torch.cuda.is_available() else 'cpu')
@@ -125,6 +126,15 @@ def main(input_type, dataset):
             pool.map(train_worker_with_id, args_list)
         k = k + 1
 
+    funcs.greedy_forward_feature_selection_validation(model_save_path_base, n_dr_feats, n_p_feats, input_type, dataset, n_fold=10)
+
+    feature_file = model_save_path_base + '/selected_features_greedy.json'
+    with open(feature_file, 'r') as f:
+        selected_features = json.load(f)
+
+    selected_drug_features = selected_features['selected_drug_features']
+    selected_protein_features = selected_features['selected_protein_features']
+
     # test
     test_drug = np.loadtxt(base_path + '/Drug_id.csv', dtype=str, delimiter=",", skiprows=1)
     test_protein = np.loadtxt(base_path + '/Protein_id.csv', dtype=str, delimiter=",", skiprows=1)
@@ -146,8 +156,8 @@ def main(input_type, dataset):
         print('fold: ', fold_type)
         model_save_path = model_save_path_base + '/' + fold_type
 
-        for m in range(n_dr_feats):
-            for n in range(n_p_feats):
+        for m in selected_drug_features:
+            for n in selected_protein_features:
                 drug_emb = drug_embedding_list[m]
                 protein_emb = protein_embedding_list[n]
                 n_dr_f = len(drug_emb[0])
@@ -183,7 +193,7 @@ def main(input_type, dataset):
 
     all_scores = all_scores / 10
     all_output_pandas = pd.DataFrame(all_scores)
-    all_output_pandas.to_csv("case study/All_scores_10fold_" + input_type + "_20250125.csv", index=False, header=False)
+    all_output_pandas.to_csv("case study/All_scores_10fold_" + input_type + ".csv", index=False, header=False)
 
 
 if __name__ == '__main__':

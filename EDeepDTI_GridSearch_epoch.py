@@ -45,9 +45,9 @@ all_output_results = pd.DataFrame()
 base_path = dataset_base + dataset + '/' + predict_type
 
 
-def get_cross_validation_metric(drug_feature_list, protein_feature_list, model_save_path_base, n_p_feats, epoch_name, data_type='val'):
+def get_cross_validation_metric(drug_feature_list, protein_feature_list, model_save_path_base, n_p_feats, epoch_name, data_type='val', n_fold=5):
     auc_list, aupr_list = [], []
-    for k in range(5):
+    for k in range(n_fold):
         fold_type = 'fold' + str(k + 1)
         model_save_path = model_save_path_base + '/' + fold_type
         labels_file = model_save_path + '/' + data_type + '_labels.csv'
@@ -78,9 +78,9 @@ def get_cross_validation_metric(drug_feature_list, protein_feature_list, model_s
     mean_aupr = np.mean(aupr_list)
     return mean_auc, mean_aupr
 
-def get_list_result(drug_feature_list, protein_feature_list, model_save_path_base, n_dr_feats, n_p_feats, epoch_name):
+def get_list_result(drug_feature_list, protein_feature_list, model_save_path_base, n_dr_feats, n_p_feats, epoch_name, n_fold=5):
     output_score = np.zeros(shape=(7, 5))
-    for k in range(5):
+    for k in range(n_fold):
         fold_type = 'fold' + str(k + 1)
         model_save_path = model_save_path_base + '/' + fold_type
         all_labels = np.loadtxt(model_save_path + '/test_labels.csv', skiprows=1)
@@ -99,7 +99,7 @@ def get_list_result(drug_feature_list, protein_feature_list, model_save_path_bas
     pd_out = output_score2[['AUC', 'AUPR', 'ACC', 'MCC', 'F1']]
     return pd_out
 
-def greedy_forward_feature_selection_validation(model_save_path_base, n_dr_feats, n_p_feats, input_type, dataset, epoch_name):
+def greedy_forward_feature_selection_validation(model_save_path_base, n_dr_feats, n_p_feats, input_type, dataset, epoch_name, n_fold=5):
     metric_name = 'AUC' if dataset == 'DTI' else 'AUPR'
 
     selected_drug_features = []
@@ -125,7 +125,7 @@ def greedy_forward_feature_selection_validation(model_save_path_base, n_dr_feats
             for drug_feat in all_drug_features:
                 for protein_feat in all_protein_features:
                     val_auc, val_aupr = get_cross_validation_metric([drug_feat], [protein_feat],
-                                                                    model_save_path_base, n_p_feats, epoch_name, 'val')
+                                                                    model_save_path_base, n_p_feats, epoch_name, 'val', n_fold)
                     val_metric = val_auc if dataset == 'DTI' else val_aupr
 
                     if val_metric >= best_pair_metric:
@@ -147,7 +147,7 @@ def greedy_forward_feature_selection_validation(model_save_path_base, n_dr_feats
         for drug_feat in remaining_drug_features:
             temp_drug_features = selected_drug_features + [drug_feat]
             val_auc, val_aupr = get_cross_validation_metric(temp_drug_features, selected_protein_features,
-                                                            model_save_path_base, n_p_feats, 'val')
+                                                            model_save_path_base, n_p_feats, 'val', n_fold)
             val_metric = val_auc if dataset == 'DTI' else val_aupr
 
             if val_metric >= best_candidate_metric:
@@ -160,7 +160,7 @@ def greedy_forward_feature_selection_validation(model_save_path_base, n_dr_feats
         for protein_feat in remaining_protein_features:
             temp_protein_features = selected_protein_features + [protein_feat]
             val_auc, val_aupr = get_cross_validation_metric(selected_drug_features, temp_protein_features,
-                                                            model_save_path_base, n_p_feats, epoch_name, 'val')
+                                                            model_save_path_base, n_p_feats, epoch_name, 'val', n_fold)
             val_metric = val_auc if dataset == 'DTI' else val_aupr
 
             if val_metric >= best_candidate_metric:
@@ -223,7 +223,7 @@ def greedy_forward_feature_selection_validation(model_save_path_base, n_dr_feats
     return selected_drug_features, selected_protein_features
 
 
-def evaluate_greedy_selected_features_on_test(model_save_path_base, n_dr_feats, n_p_feats, result_save_path_base, epoch_name):
+def evaluate_greedy_selected_features_on_test(model_save_path_base, n_dr_feats, n_p_feats, result_save_path_base, epoch_name, n_fold=5):
     # Load saved feature selection results
     feature_file = model_save_path_base + '/selected_features_greedy.json'
     if not os.path.exists(feature_file):
@@ -237,7 +237,7 @@ def evaluate_greedy_selected_features_on_test(model_save_path_base, n_dr_feats, 
     selected_protein_features = selected_features['selected_protein_features']
 
     # Calculate test set performance using existing get_list_result function
-    test_results = get_list_result(selected_drug_features, selected_protein_features, result_save_path_base, n_dr_feats, n_p_feats, epoch_name)
+    test_results = get_list_result(selected_drug_features, selected_protein_features, result_save_path_base, n_dr_feats, n_p_feats, epoch_name, n_fold)
     return test_results
 
 
@@ -391,8 +391,8 @@ for this_epoch in all_epochs:
     mean_acc, mean_auc, mean_aupr, mean_mcc, mean_f1, mean_recall, mean_precision = funcs.show_metric(
         output_score, base_path)
 
-    greedy_forward_feature_selection_validation(model_save_path_base, n_dr_feats, n_p_feats, input_type, dataset, this_epoch)
-    result_greedy = evaluate_greedy_selected_features_on_test(model_save_path_base, n_dr_feats, n_p_feats, model_save_path_base, this_epoch)
+    greedy_forward_feature_selection_validation(model_save_path_base, n_dr_feats, n_p_feats, input_type, dataset, this_epoch, n_fold=5)
+    result_greedy = evaluate_greedy_selected_features_on_test(model_save_path_base, n_dr_feats, n_p_feats, model_save_path_base, this_epoch, n_fold=5)
 
 
     this_dict = {'lr': lr, 'wd': wd, 'b_size': b_size, 'n_hidden': n_hidden, 'epochs': this_epoch,

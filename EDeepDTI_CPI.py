@@ -170,7 +170,7 @@ def main(input_type, dataset, predict_type):
             print('time: ', time2 - time1)
 
         # greedy_forward_feature_selection
-        funcs.greedy_forward_feature_selection_validation(model_save_path_base, n_dr_feats, n_p_feats, input_type, dataset)
+        funcs.greedy_forward_feature_selection_validation(model_save_path_base, n_dr_feats, n_p_feats, input_type, dataset, n_fold=5)
     #
     # # test
     if predict_type == 'new_protein' or predict_type == 'new_drug_protein':
@@ -221,7 +221,7 @@ def main(input_type, dataset, predict_type):
     print('all base learners:')
     print(result_out)
 
-    result_greedy = funcs.evaluate_greedy_selected_features_on_test(model_save_path_base, n_dr_feats, n_p_feats, data_save_path_base)
+    result_greedy = funcs.evaluate_greedy_selected_features_on_test(model_save_path_base, n_dr_feats, n_p_feats, data_save_path_base, n_fold=5)
     result_greedy.to_csv(save_path + dataset + '_' + predict_type + '_score.csv', index=False)
     print('greedy forward base learners:')
     print(result_greedy)

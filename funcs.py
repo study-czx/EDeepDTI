@@ -173,9 +173,9 @@ def show_metric(output_score, result_path, input_type):
     pd_output.to_csv(result_path + '_score_'+input_type+'.csv', index=False)
     return mean_acc, mean_auc, mean_aupr, mean_mcc, mean_f1, mean_recall, mean_precision
 
-def get_result(model_save_path_base, n_dr_feats, n_p_feats):
+def get_result(model_save_path_base, n_dr_feats, n_p_feats, n_fold):
     output_score = np.zeros(shape=(7, 5))
-    for k in range(5):
+    for k in range(n_fold):
         fold_type = 'fold' + str(k + 1)
         model_save_path = model_save_path_base + '/' + fold_type
         all_labels = np.loadtxt(model_save_path + '/test_labels.csv', skiprows=1)
@@ -194,9 +194,9 @@ def get_result(model_save_path_base, n_dr_feats, n_p_feats):
     pd_out = output_score2[['AUC', 'AUPR', 'ACC', 'MCC', 'F1']]
     return pd_out
 
-def get_list_result(drug_feature_list, protein_feature_list, model_save_path_base, n_dr_feats, n_p_feats):
+def get_list_result(drug_feature_list, protein_feature_list, model_save_path_base, n_dr_feats, n_p_feats, n_fold):
     output_score = np.zeros(shape=(7, 5))
-    for k in range(5):
+    for k in range(n_fold):
         fold_type = 'fold' + str(k + 1)
         model_save_path = model_save_path_base + '/' + fold_type
         all_labels = np.loadtxt(model_save_path + '/test_labels.csv', skiprows=1)
@@ -235,9 +235,9 @@ def get_feature_name(index, feature_type, input_type):
         return protein_names.get(index, f'protein_{index}')
 
 
-def get_cross_validation_metric(drug_feature_list, protein_feature_list, model_save_path_base, n_p_feats, data_type='val'):
+def get_cross_validation_metric(drug_feature_list, protein_feature_list, model_save_path_base, n_p_feats, n_fold, data_type='val'):
     auc_list, aupr_list = [], []
-    for k in range(5):
+    for k in range(n_fold):
         fold_type = 'fold' + str(k + 1)
         model_save_path = model_save_path_base + '/' + fold_type
         labels_file = model_save_path + '/' + data_type + '_labels.csv'
@@ -269,7 +269,7 @@ def get_cross_validation_metric(drug_feature_list, protein_feature_list, model_s
     return mean_auc, mean_aupr
 
 
-def greedy_forward_feature_selection_validation(model_save_path_base, n_dr_feats, n_p_feats, input_type, dataset):
+def greedy_forward_feature_selection_validation(model_save_path_base, n_dr_feats, n_p_feats, input_type, dataset, n_fold):
     metric_name = 'AUC' if dataset == 'DTI' else 'AUPR'
 
     # print(f"Dataset: {dataset}")
@@ -299,7 +299,7 @@ def greedy_forward_feature_selection_validation(model_save_path_base, n_dr_feats
             for drug_feat in all_drug_features:
                 for protein_feat in all_protein_features:
                     val_auc, val_aupr = get_cross_validation_metric([drug_feat], [protein_feat],
-                                                                    model_save_path_base, n_p_feats, 'val')
+                                                                    model_save_path_base, n_p_feats, n_fold, 'val')
                     val_metric = val_auc if dataset == 'DTI' else val_aupr
 
                     if val_metric >= best_pair_metric:
@@ -321,7 +321,7 @@ def greedy_forward_feature_selection_validation(model_save_path_base, n_dr_feats
         for drug_feat in remaining_drug_features:
             temp_drug_features = selected_drug_features + [drug_feat]
             val_auc, val_aupr = get_cross_validation_metric(temp_drug_features, selected_protein_features,
-                                                            model_save_path_base, n_p_feats, 'val')
+                                                            model_save_path_base, n_p_feats, n_fold, 'val')
             val_metric = val_auc if dataset == 'DTI' else val_aupr
 
             if val_metric >= best_candidate_metric:
@@ -334,7 +334,7 @@ def greedy_forward_feature_selection_validation(model_save_path_base, n_dr_feats
         for protein_feat in remaining_protein_features:
             temp_protein_features = selected_protein_features + [protein_feat]
             val_auc, val_aupr = get_cross_validation_metric(selected_drug_features, temp_protein_features,
-                                                            model_save_path_base, n_p_feats, 'val')
+                                                            model_save_path_base, n_p_feats, n_fold, 'val')
             val_metric = val_auc if dataset == 'DTI' else val_aupr
 
             if val_metric >= best_candidate_metric:
@@ -397,7 +397,7 @@ def greedy_forward_feature_selection_validation(model_save_path_base, n_dr_feats
     return selected_drug_features, selected_protein_features
 
 
-def evaluate_greedy_selected_features_on_test(model_save_path_base, n_dr_feats, n_p_feats, result_save_path_base):
+def evaluate_greedy_selected_features_on_test(model_save_path_base, n_dr_feats, n_p_feats, result_save_path_base, n_fold):
     # Load saved feature selection results
     feature_file = model_save_path_base + '/selected_features_greedy.json'
     if not os.path.exists(feature_file):
@@ -411,10 +411,10 @@ def evaluate_greedy_selected_features_on_test(model_save_path_base, n_dr_feats, 
     selected_protein_features = selected_features['selected_protein_features']
 
     # Calculate test set performance using existing get_list_result function
-    test_results = get_list_result(selected_drug_features, selected_protein_features, result_save_path_base, n_dr_feats, n_p_feats)
+    test_results = get_list_result(selected_drug_features, selected_protein_features, result_save_path_base, n_dr_feats, n_p_feats, n_fold)
     return test_results
 
-def greedy_backward_feature_elimination_validation(model_save_path_base, n_dr_feats, n_p_feats, input_type, dataset):
+def greedy_backward_feature_elimination_validation(model_save_path_base, n_dr_feats, n_p_feats, input_type, dataset, n_fold):
     metric_name = 'AUC' if dataset == 'DTI' else 'AUPR'
     # Start with all features
     selected_drug_features = list(range(n_dr_feats))
@@ -422,7 +422,7 @@ def greedy_backward_feature_elimination_validation(model_save_path_base, n_dr_fe
 
     # Calculate initial performance with all features
     val_auc, val_aupr = get_cross_validation_metric(selected_drug_features, selected_protein_features,
-                                                    model_save_path_base, n_p_feats, 'val')
+                                                    model_save_path_base, n_p_feats, n_fold,'val')
     best_val_metric = val_auc if dataset == 'DTI' else val_aupr
 
     iteration = 0
@@ -438,7 +438,7 @@ def greedy_backward_feature_elimination_validation(model_save_path_base, n_dr_fe
             for drug_feat in selected_drug_features:
                 temp_drug_features = [f for f in selected_drug_features if f != drug_feat]
                 val_auc, val_aupr = get_cross_validation_metric(temp_drug_features, selected_protein_features,
-                                                                model_save_path_base, n_p_feats, 'val')
+                                                                model_save_path_base, n_p_feats, n_fold, 'val')
                 val_metric = val_auc if dataset == 'DTI' else val_aupr
 
                 if val_metric > best_metric_after_removal:
@@ -451,7 +451,7 @@ def greedy_backward_feature_elimination_validation(model_save_path_base, n_dr_fe
             for protein_feat in selected_protein_features:
                 temp_protein_features = [f for f in selected_protein_features if f != protein_feat]
                 val_auc, val_aupr = get_cross_validation_metric(selected_drug_features, temp_protein_features,
-                                                                model_save_path_base, n_p_feats, 'val')
+                                                                model_save_path_base, n_p_feats, n_fold, 'val')
                 val_metric = val_auc if dataset == 'DTI' else val_aupr
 
                 if val_metric > best_metric_after_removal:
@@ -505,7 +505,7 @@ def greedy_backward_feature_elimination_validation(model_save_path_base, n_dr_fe
     return selected_drug_features, selected_protein_features
 
 
-def evaluate_backward_selected_features_on_test(model_save_path_base, n_dr_feats, n_p_feats, result_save_path_base):
+def evaluate_backward_selected_features_on_test(model_save_path_base, n_dr_feats, n_p_feats, result_save_path_base, n_fold):
     # Load saved feature selection results
     feature_file = model_save_path_base + '/selected_features_backward.json'
     if not os.path.exists(feature_file):
@@ -519,5 +519,5 @@ def evaluate_backward_selected_features_on_test(model_save_path_base, n_dr_feats
     selected_protein_features = selected_features['selected_protein_features']
 
     # Calculate test set performance using existing get_list_result function
-    test_results = get_list_result(selected_drug_features, selected_protein_features, result_save_path_base, n_dr_feats, n_p_feats)
+    test_results = get_list_result(selected_drug_features, selected_protein_features, result_save_path_base, n_dr_feats, n_p_feats, n_fold)
     return test_results

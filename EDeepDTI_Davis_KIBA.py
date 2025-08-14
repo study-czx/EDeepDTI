@@ -147,7 +147,7 @@ def main(input_type, dataset):
         time2 = time.time()
         print('time: ', time2 - time1)
 
-    funcs.greedy_forward_feature_selection_validation(model_save_path_base, n_dr_feats, n_p_feats, input_type, dataset)
+    funcs.greedy_forward_feature_selection_validation(model_save_path_base, n_dr_feats, n_p_feats, input_type, dataset, n_fold=5)
 
     print('start test')
     for k in range(5):
@@ -188,7 +188,7 @@ def main(input_type, dataset):
     print(result_out)
 
     result_greedy = funcs.evaluate_greedy_selected_features_on_test(model_save_path_base, n_dr_feats, n_p_feats,
-                                                                    model_save_path_base)
+                                                                    model_save_path_base, n_fold=5)
     result_greedy.to_csv(save_path + dataset + '_score.csv', index=False)
     print('greedy forward base learners:')
     print(result_greedy)

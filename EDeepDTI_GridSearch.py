@@ -215,9 +215,9 @@ for lr in lrs:
                                                       index=False)
 
                 funcs.greedy_forward_feature_selection_validation(model_save_path_base, n_dr_feats, n_p_feats,
-                                                                  input_type, dataset)
+                                                                  input_type, dataset, n_fold=5)
                 result_greedy = funcs.evaluate_greedy_selected_features_on_test(model_save_path_base, n_dr_feats,
-                                                                                n_p_feats, model_save_path_base)
+                                                                                n_p_feats, model_save_path_base, n_fold=5)
 
                 this_dict = {'lr': lr, 'wd': wd, 'b_size': b_size, 'n_hidden': n_hidden,
                              'hidden1': hidden1, 'hidden2': hidden2, 'hidden3': hidden3,
