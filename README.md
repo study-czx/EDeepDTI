@@ -16,7 +16,6 @@ Accurate identification of drug-target interactions (DTIs) is a crucial step in 
   - [Process of datasets](#Process-of-datasets)
   - [Calculation of feature](#Calculation-of-feature)
   - [Case Study](#Case-Study)
-- [Other biological association prediction tasks](#Other-biological-association-prediction-tasks)
 - [Citation](#Citation)
 - [Supplement](#Supplement)
 
