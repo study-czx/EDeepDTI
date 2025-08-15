@@ -88,7 +88,7 @@ For the runtime environment of all pre-trained models and to download the pre-tr
 （1）Run `get_grover_feature.py` to generate drug grover features for DrugBank, CPI, Davis, and KIBA datasets.  
 （2）For selecting between max pooling and average pooling, refer to lines 320 and 321 in `grover/model/models.py`. If you obtain the code from the original GitHub repository, line 108 in `grover/model/layers.py` also needs modification.
  * Chemberta-2 (ChemBERTa/)    
-（1）Run `get_chembert_a_features.py` to generate drug chemberta2-mtr and chemberta2-mlm features for DrugBank, CPI, Davis, and KIBA datasets.
+（1）Run `get_chembert_a_features.py` to generate drug chemberta2 features for DrugBank, CPI, Davis, and KIBA datasets.
  * MoLFormer (molformer/notebooks/pretrained_molformer/)  
 （1）Run `get_molformer_features.py` to generate drug molformer features for DrugBank, CPI, Davis, and KIBA datasets.
  * KGPT (KGPT/)
@@ -122,7 +122,7 @@ For the runtime environment of all pre-trained models and to download the pre-tr
 （1）Get protein pdb files from Protein Data Bank (PDB) database ('https://www.rcsb.org/') .<br>
 （2）Get protein pdbqt files with PyMOL and MGLTools (proteins_pdbqt/).<br>
 （3）Run `get_drug_pdb.py` to get drug pdbqt files (drug_pdbqt/).<br>
-（4）Run `get_top_end_drugs.py` to get top 10 and bottom 10 predicted drugs, and known interacting drugs of selected proteins.<br>
+（4）Run `get_top_end_drugs.py` to get top 10 and bottom 30 predicted drugs, and known interacting drugs of selected proteins.<br>
 （5）Run `main_dock.py` to perform batch docking of drugs with proteins based on Autodock Vina, and save the docking results (result_pdbqt/ and result_pdbqt_fixed/) and log files (result_log/).<br>
 （6）Run `show_results.py` to get binding affinities (affinity/).<br>
 （7）Get interaction types using the Protein-Ligand Interaction Profiler (PLIP) (complexes/*.pse).<br>
