@@ -122,7 +122,7 @@ For the runtime environment of all pre-trained models and to download the pre-tr
 （1）Get protein pdb files from Protein Data Bank (PDB) database ('https://www.rcsb.org/') .<br>
 （2）Get protein pdbqt files with PyMOL and MGLTools (proteins_pdbqt/).<br>
 （3）Run `get_drug_pdb.py` to get drug pdbqt files (drug_pdbqt/).<br>
-（4）Run `get_top_end_drugs.py` to get top 10 and bottom 30 predicted drugs, and known interacting drugs of selected proteins.<br>
+（4）Run `get_top_end_drugs.py` to get top 30 and bottom 30 predicted drugs, and known interacting drugs of selected proteins.<br>
 （5）Run `main_dock.py` to perform batch docking of drugs with proteins based on Autodock Vina, and save the docking results (result_pdbqt/ and result_pdbqt_fixed/) and log files (result_log/).<br>
 （6）Run `show_results.py` to get binding affinities (affinity/).<br>
 （7）Get interaction types using the Protein-Ligand Interaction Profiler (PLIP) (complexes/*.pse).<br>
