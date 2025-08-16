@@ -6,7 +6,7 @@ import pandas as pd
 import data_loader
 from model import DNNNet
 import torch.multiprocessing as mp
-from train_test import train_model, test_model, get_result
+from train_test import train_model, test_model
 import os
 import time
 
@@ -17,7 +17,7 @@ device = torch.device('cuda:0' if torch.cuda.is_available() else 'cpu')
 dataset_base = 'datasets_DTI/datasets/'
 datasets = ['Davis_5fold', 'KIBA_5fold']
 
-input_types = ['d']
+input_types = ['e', 'd']
 # predict_types = ['5_fold']
 # input_types = ['e']
 
@@ -182,7 +182,7 @@ def main(input_type, dataset):
     if not os.path.exists(save_path):
         os.makedirs(save_path)
 
-    result_out = get_result(model_save_path_base, n_dr_feats, n_p_feats)
+    result_out = funcs.get_result(model_save_path_base, n_dr_feats, n_p_feats, 5)
     # result_out.to_csv('view_baseline_results/' + name_map[save_base] + '/' + dataset + '_score_origin.csv', index=False)
     print('all base learners:')
     print(result_out)

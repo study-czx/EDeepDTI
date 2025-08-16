@@ -52,58 +52,33 @@ def Get_index(data, id_map1, id_map2):
         my_list.append([id_map1[data[i][0]], id_map2[data[i][1]]])
     return my_list
 
+# 将 Dataset 类定义移到模块顶部
+class Dataset(data.Dataset):
+    def __init__(self, X, Y):
+        self.Data = X
+        self.Label = Y
+
+    def __getitem__(self, index):
+        txt = torch.from_numpy(self.Data[index])
+        label = torch.tensor(self.Label[index])
+        return txt, label
+
+    def __len__(self):
+        return len(self.Data)
+
 
 def get_train_loader(X, Y, b_size):
-    class Dataset(data.Dataset):
-        def __init__(self):
-            self.Data = X
-            self.Label = Y
-
-        def __getitem__(self, index):
-            txt = torch.from_numpy(self.Data[index])
-            label = torch.tensor(self.Label[index])
-            return txt, label
-
-        def __len__(self):
-            return len(self.Data)
-
-    Data = Dataset()
+    Data = Dataset(X, Y)
     loader = data.DataLoader(Data, batch_size=b_size, shuffle=True, drop_last=True, num_workers=0)
     return loader
 
 def get_dev_loader(X, Y, b_size):
-    class Dataset(data.Dataset):
-        def __init__(self):
-            self.Data = X
-            self.Label = Y
-
-        def __getitem__(self, index):
-            txt = torch.from_numpy(self.Data[index])
-            label = torch.tensor(self.Label[index])
-            return txt, label
-
-        def __len__(self):
-            return len(self.Data)
-
-    Data = Dataset()
+    Data = Dataset(X, Y)
     loader = data.DataLoader(Data, batch_size=b_size, shuffle=True, drop_last=True, num_workers=0)
     return loader
 
 def get_test_loader(X, Y, b_size):
-    class Dataset(data.Dataset):
-        def __init__(self):
-            self.Data = X
-            self.Label = Y
-
-        def __getitem__(self, index):
-            txt = torch.from_numpy(self.Data[index])
-            label = torch.tensor(self.Label[index])
-            return txt, label
-
-        def __len__(self):
-            return len(self.Data)
-
-    Data = Dataset()
+    Data = Dataset(X, Y)
     loader = data.DataLoader(Data, batch_size=b_size, shuffle=False, num_workers=0)
     return loader
 
@@ -264,14 +239,14 @@ def get_cross_validation_metric(drug_feature_list, protein_feature_list, model_s
     if not auc_list:
         return 0, 0
 
-    mean_auc = np.mean(auc_list)
-    mean_aupr = np.mean(aupr_list)
+    mean_auc = round(sum(auc_list) / len(auc_list), 4)
+    mean_aupr = round(sum(aupr_list) / len(aupr_list), 4)
     return mean_auc, mean_aupr
 
 
 def greedy_forward_feature_selection_validation(model_save_path_base, n_dr_feats, n_p_feats, input_type, dataset, n_fold):
     metric_name = 'AUC' if dataset == 'DTI' else 'AUPR'
-
+    # metric_name = 'AUC'
     # print(f"Dataset: {dataset}")
     # print(f"Drug features: {n_dr_feats}, Protein features: {n_p_feats}")
     # print(f"Greedy Forward Feature Selection Based on Validation {metric_name}")
@@ -301,6 +276,7 @@ def greedy_forward_feature_selection_validation(model_save_path_base, n_dr_feats
                     val_auc, val_aupr = get_cross_validation_metric([drug_feat], [protein_feat],
                                                                     model_save_path_base, n_p_feats, n_fold, 'val')
                     val_metric = val_auc if dataset == 'DTI' else val_aupr
+                    # val_metric = val_auc
 
                     if val_metric >= best_pair_metric:
                         best_pair_metric = val_metric
@@ -323,6 +299,7 @@ def greedy_forward_feature_selection_validation(model_save_path_base, n_dr_feats
             val_auc, val_aupr = get_cross_validation_metric(temp_drug_features, selected_protein_features,
                                                             model_save_path_base, n_p_feats, n_fold, 'val')
             val_metric = val_auc if dataset == 'DTI' else val_aupr
+            # val_metric = val_auc
 
             if val_metric >= best_candidate_metric:
                 best_candidate_metric = val_metric
@@ -336,6 +313,7 @@ def greedy_forward_feature_selection_validation(model_save_path_base, n_dr_feats
             val_auc, val_aupr = get_cross_validation_metric(selected_drug_features, temp_protein_features,
                                                             model_save_path_base, n_p_feats, n_fold, 'val')
             val_metric = val_auc if dataset == 'DTI' else val_aupr
+            # val_metric = val_auc
 
             if val_metric >= best_candidate_metric:
                 best_candidate_metric = val_metric
@@ -343,7 +321,7 @@ def greedy_forward_feature_selection_validation(model_save_path_base, n_dr_feats
                 candidate_type = 'protein'
 
         # If found a feature that improves performance
-        if best_candidate_metric > best_val_metric:
+        if best_candidate_metric >= best_val_metric:
             if candidate_type == 'drug':
                 selected_drug_features.append(best_candidate)
                 feature_name = get_feature_name(best_candidate, 'drug', input_type)
@@ -454,7 +432,7 @@ def greedy_backward_feature_elimination_validation(model_save_path_base, n_dr_fe
                                                                 model_save_path_base, n_p_feats, n_fold, 'val')
                 val_metric = val_auc if dataset == 'DTI' else val_aupr
 
-                if val_metric > best_metric_after_removal:
+                if val_metric >= best_metric_after_removal:
                     best_metric_after_removal = val_metric
                     worst_feature = protein_feat
                     worst_feature_type = 'protein'

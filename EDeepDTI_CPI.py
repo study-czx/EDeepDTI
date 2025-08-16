@@ -7,7 +7,7 @@ import pandas as pd
 import data_loader
 from model import DNNNet
 import torch.multiprocessing as mp
-from train_test import train_model, test_model, get_result
+from train_test import train_model, test_model
 import os
 import time
 import gc
@@ -30,7 +30,7 @@ num_epoches = 300
 
 losses = nn.BCELoss()
 
-name_map = {'EDDTI-e': 'EDeepDTI', 'EDDTI-d': 'EDeepDTI-d', 'EDDTI-s': 'EDeepDTI-s'}
+name_map = {'EDDTI-e': 'EDeepDTI', 'EDDTI-d': 'EDeepDTI-d'}
 
 n_jobs = 6
 
@@ -84,6 +84,7 @@ def main(input_type, dataset, predict_type):
     # get id map and features
     dr_id_map, p_id_map, Drug_features, Protein_features = data_loader.Get_feature(dataset, input_type)
     n_dr_feats, n_p_feats = len(Drug_features), len(Protein_features)
+
     # for CPI dataset, split train_dev_features and test_features
     train_drug_id = pd.read_csv('datasets_DTI/datasets/CPI/compound_id.csv', sep=',', dtype=str)
     train_protein_id = pd.read_csv('datasets_DTI/datasets/CPI/protein_id.csv', sep=',', dtype=str)
@@ -215,7 +216,7 @@ def main(input_type, dataset, predict_type):
     if not os.path.exists(save_path):
         os.makedirs(save_path)
 
-    result_out = get_result(data_save_path_base, n_dr_feats, n_p_feats)
+    result_out = funcs.get_result(data_save_path_base, n_dr_feats, n_p_feats, 5)
     # result_out.to_csv(
     #     'view_baseline_results/' + name_map[save_base] + '/' + dataset + '_' + predict_type + '_score_origin.csv', index=False)
     print('all base learners:')
